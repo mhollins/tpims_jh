@@ -1,0 +1,32 @@
+
+<div *ngIf="logos">
+    <h2><span>Logos</span> {{logos.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Logo Url</span></dt>
+        <dd>
+            <span>{{logos.logoUrl}}</span>
+        </dd>
+        <dt><span>Site</span></dt>
+        <dd>
+            <div *ngIf="logos.siteId">
+                <a [routerLink]="['/site-tpims', logos.siteId]">{{logos.siteId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'logos-tpims/'+ logos.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

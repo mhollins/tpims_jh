@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "site",
+            "otherEntityName": "site",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "status"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "reportedAvailable",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "trend",
+            "fieldType": "TrendOptions",
+            "fieldValues": "EMPTYING,STEADY,FILLING"
+        },
+        {
+            "fieldName": "open",
+            "javadoc": "wheather parking site is open or closed",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "trustData",
+            "javadoc": "reports that the site is opeating normally\nPossible reasons for false include construction,\nmaintenance, equipment failures",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "lastDeviceUpdate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastOperatorUpdate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20180216162747",
+    "javadoc": "Dynamic Site Status",
+    "entityTableName": "site_status",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "tpims"
+}

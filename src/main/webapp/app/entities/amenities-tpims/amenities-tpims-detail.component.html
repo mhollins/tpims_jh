@@ -1,0 +1,32 @@
+
+<div *ngIf="amenities">
+    <h2><span>Amenities</span> {{amenities.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Amenity</span></dt>
+        <dd>
+            <span>{{amenities.amenity}}</span>
+        </dd>
+        <dt><span>Site</span></dt>
+        <dd>
+            <div *ngIf="amenities.siteId">
+                <a [routerLink]="['/site-tpims', amenities.siteId]">{{amenities.siteId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'amenities-tpims/'+ amenities.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

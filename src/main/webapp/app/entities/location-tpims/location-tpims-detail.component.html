@@ -1,0 +1,76 @@
+
+<div *ngIf="location">
+    <h2><span>Location</span> {{location.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Location Type</span></dt>
+        <dd>
+            <span>{{location.locationType}}</span>
+        </dd>
+        <dt><span>Location Owner</span></dt>
+        <dd>
+            <span>{{location.locationOwner}}</span>
+        </dd>
+        <dt><span>Relevant Highway</span></dt>
+        <dd>
+            <span>{{location.relevantHighway}}</span>
+        </dd>
+        <dt><span>Reference Post</span></dt>
+        <dd>
+            <span>{{location.referencePost}}</span>
+        </dd>
+        <dt><span>Exit Id</span></dt>
+        <dd>
+            <span>{{location.exitId}}</span>
+        </dd>
+        <dt><span>Direction Of Travel</span></dt>
+        <dd>
+            <span>{{location.directionOfTravel}}</span>
+        </dd>
+        <dt><span>Street Adr</span></dt>
+        <dd>
+            <span>{{location.streetAdr}}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+            <span>{{location.city}}</span>
+        </dd>
+        <dt><span>Postal Code</span></dt>
+        <dd>
+            <span>{{location.postalCode}}</span>
+        </dd>
+        <dt><span>Time Zone</span></dt>
+        <dd>
+            <span>{{location.timeZone}}</span>
+        </dd>
+        <dt><span>Latitude</span></dt>
+        <dd>
+            <span>{{location.latitude}}</span>
+        </dd>
+        <dt><span>Longitude</span></dt>
+        <dd>
+            <span>{{location.longitude}}</span>
+        </dd>
+        <dt><span>County</span></dt>
+        <dd>
+            <div *ngIf="location.countyId">
+                <a [routerLink]="['/county-tpims', location.countyId]">{{location.countyId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'location-tpims/'+ location.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

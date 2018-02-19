@@ -44,6 +44,21 @@ public class CacheConfiguration {
             cm.createCache(com.ngc.ts.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.State.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.District.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.County.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Location.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Site.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Site.class.getName() + ".devices", jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Site.class.getName() + ".amenities", jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Site.class.getName() + ".images", jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Site.class.getName() + ".logos", jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Amenities.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Images.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Logos.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.SiteStatus.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.HistoricSiteData.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.Device.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

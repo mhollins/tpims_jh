@@ -1,0 +1,54 @@
+
+<div *ngIf="siteStatus">
+    <h2><span>Site Status</span> {{siteStatus.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Reported Available</span></dt>
+        <dd>
+            <span>{{siteStatus.reportedAvailable}}</span>
+        </dd>
+        <dt><span>Trend</span></dt>
+        <dd>
+            <span>{{siteStatus.trend}}</span>
+        </dd>
+        <dt><span ngbTooltip="wheather parking site is open or closed">Open</span></dt>
+        <dd>
+            <span>{{siteStatus.open}}</span>
+        </dd>
+        <dt><span ngbTooltip="reports that the site is opeating normally
+Possible reasons for false include construction,
+maintenance, equipment failures">Trust Data</span></dt>
+        <dd>
+            <span>{{siteStatus.trustData}}</span>
+        </dd>
+        <dt><span>Last Device Update</span></dt>
+        <dd>
+            <span>{{siteStatus.lastDeviceUpdate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Last Operator Update</span></dt>
+        <dd>
+            <span>{{siteStatus.lastOperatorUpdate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Site</span></dt>
+        <dd>
+            <div *ngIf="siteStatus.siteId">
+                <a [routerLink]="['/site-tpims', siteStatus.siteId]">{{siteStatus.siteId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'site-status-tpims/'+ siteStatus.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

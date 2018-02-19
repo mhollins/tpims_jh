@@ -1,0 +1,82 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "site"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "devices",
+            "otherEntityName": "device",
+            "otherEntityRelationshipName": "site"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "amenities",
+            "otherEntityName": "amenities",
+            "otherEntityRelationshipName": "site"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "images",
+            "otherEntityName": "images",
+            "otherEntityRelationshipName": "site"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "logos",
+            "otherEntityName": "logos",
+            "otherEntityRelationshipName": "site"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "status",
+            "otherEntityName": "siteStatus",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "site"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "siteId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "siteName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "totalCapacity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lowThreshold",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "staticDataUpdated",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ownership",
+            "fieldType": "OwnerShipOptions",
+            "fieldValues": "PR,PU"
+        }
+    ],
+    "changelogDate": "20180216162743",
+    "javadoc": "Static Site configuration",
+    "entityTableName": "site",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "tpims"
+}

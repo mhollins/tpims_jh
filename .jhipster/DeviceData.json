@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "device",
+            "otherEntityName": "device",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "timeStamp",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "deviceName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zone",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "speed",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "volume",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "occupancy",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180322203709",
+    "entityTableName": "device_data",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "tpims"
+}

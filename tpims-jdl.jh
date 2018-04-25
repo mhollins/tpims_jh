@@ -1,0 +1,156 @@
+entity State {
+	stateName String
+}
+entity District {
+	districtName String
+}
+entity County {
+	countyName String
+}
+
+/** Site Location */
+entity Location {
+	locationType String,
+    locationOwner String,
+	relevantHighway String,
+    referencePost String,
+    exitId String,
+    directionOfTravel String,
+    streetAdr String,
+	city String,
+	postalCode String,
+    timeZone String,
+    latitude BigDecimal,
+    longitude BigDecimal
+}
+
+/** Static Site configuration **/
+entity Site {
+	siteId String required,
+	siteName String,
+    totalCapacity Integer,
+    lowThreshold Integer,
+    staticDataUpdated ZonedDateTime,
+    ownership OwnerShipOptions
+}
+
+/** PR=Private PU=Public **/
+enum OwnerShipOptions {
+	PR,
+    PU
+}
+
+entity Amenities {
+	amenity String
+}
+entity Images {
+	imageUrl String
+}
+entity Logos {
+	logoUrl String
+}
+
+/** Dynamic Site Status **/
+entity SiteStatus {
+	reportedAvailable Integer,
+    trend TrendOptions,
+    /** wheather parking site is open or closed **/
+    open Boolean,
+    /** reports that the site is opeating normally
+     *  Possible reasons for false include construction,
+     *  maintenance, equipment failures */
+    trustData Boolean,
+    lastDeviceUpdate ZonedDateTime,
+    lastOperatorUpdate ZonedDateTime,
+    
+}
+
+enum TrendOptions {
+	EMPTYING,
+    STEADY,
+    FILLING
+}
+
+entity HistoricSiteData {
+	totalCapacity Integer,
+    availability Integer,
+    trend TrendOptions,
+    open Boolean,
+    trustData Boolean,
+	timeStamp ZonedDateTime,
+    /** notes whether available spots
+     *  is based on a manual reset
+     */
+    verificationCheck Boolean,
+    /** actual number availble, can 
+     *  exceed capacity & go below low threshold
+     */
+    trueAvailable Integer
+    
+}
+
+/** Static Device Configuration **/
+entity Device {
+	deviceName String,
+    ipAddress String,
+    ipPort Integer,
+    deviceAddress Integer,
+    pollingRate Integer,
+    jmsDomain String,
+    timeout Integer,
+    location_function LocationFunctions
+}
+
+enum LocationFunctions {
+	ENTRANCE,
+    EXIT
+}
+
+entity DeviceData {
+	timeStamp ZonedDateTime,
+    deviceName String,
+    zone Integer,
+    status String,
+    speed Integer,
+    volume Integer,
+    occupancy Integer
+}
+
+/** bi-directional **/
+relationship OneToOne {
+	SiteStatus{site} to Site{status}
+}
+/** uni-directional **/
+relationship ManyToOne {
+	District{state} to State,
+	County{district} to District,
+	Location{county} to County
+}
+relationship OneToOne {
+	Site{location} to Location
+}
+
+/** uni-directional **/
+relationship ManyToOne {
+	HistoricSiteData{site} to Site
+    DeviceData{device} to Device
+}
+
+/** bi-directional **/
+relationship OneToMany {
+	Site{devices} to Device{site}
+    Site{amenities} to Amenities{site}
+    Site{images} to Images{site}
+    Site{logos} to Logos{site}
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// create DTO's
+dto * with mapstruct
+
+// Set service options
+service SiteStatus with serviceImpl
+// Set an angular suffix
+angularSuffix * with tpims

@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDeviceDataLabel">Create or edit a Device Data</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!deviceData.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="deviceData.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_timeStamp">Time Stamp</label>
+            <div class="d-flex">
+                <input id="field_timeStamp" type="datetime-local" class="form-control" name="timeStamp" [(ngModel)]="deviceData.timeStamp"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_deviceName">Device Name</label>
+            <input type="text" class="form-control" name="deviceName" id="field_deviceName"
+                [(ngModel)]="deviceData.deviceName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_zone">Zone</label>
+            <input type="number" class="form-control" name="zone" id="field_zone"
+                [(ngModel)]="deviceData.zone" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                [(ngModel)]="deviceData.status" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_speed">Speed</label>
+            <input type="number" class="form-control" name="speed" id="field_speed"
+                [(ngModel)]="deviceData.speed" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_volume">Volume</label>
+            <input type="number" class="form-control" name="volume" id="field_volume"
+                [(ngModel)]="deviceData.volume" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_occupancy">Occupancy</label>
+            <input type="number" class="form-control" name="occupancy" id="field_occupancy"
+                [(ngModel)]="deviceData.occupancy" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_device">Device</label>
+            <select class="form-control" id="field_device" name="device" [(ngModel)]="deviceData.deviceId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="deviceOption.id" *ngFor="let deviceOption of devices; trackBy: trackDeviceById">{{deviceOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

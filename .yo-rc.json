@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.ngc.ts"
     },
-    "jhipsterVersion": "4.14.0",
+    "jhipsterVersion": "4.14.3",
     "baseName": "tpims",
     "packageName": "com.ngc.ts",
     "packageFolder": "com/ngc/ts",

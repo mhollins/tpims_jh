@@ -37,6 +37,7 @@
             <th jhiSortBy="pollingRate"><span>Polling Rate</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="jmsDomain"><span>Jms Domain</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="timeout"><span>Timeout</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="locationfunction"><span>Locationfunction</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="siteId"><span>Site</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -51,6 +52,7 @@
                 <td>{{device.pollingRate}}</td>
                 <td>{{device.jmsDomain}}</td>
                 <td>{{device.timeout}}</td>
+                <td>{{device.locationfunction}}</td>
                 <td>
                     <div *ngIf="device.siteId">
                         <a [routerLink]="['../site-tpims', device.siteId  ]" >{{device.siteId}}</a>

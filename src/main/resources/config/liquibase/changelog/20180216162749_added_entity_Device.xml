@@ -49,6 +49,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="locationfunction" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="site_id" type="bigint">
                 <constraints nullable="true" />
             </column>

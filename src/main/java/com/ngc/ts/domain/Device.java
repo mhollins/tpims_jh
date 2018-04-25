@@ -10,6 +10,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.ngc.ts.domain.enumeration.LocationFunctions;
+
 /**
  * Static Device Configuration
  */
@@ -47,6 +49,10 @@ public class Device implements Serializable {
 
     @Column(name = "timeout")
     private Integer timeout;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "locationfunction")
+    private LocationFunctions locationfunction;
 
     @ManyToOne
     private Site site;
@@ -151,6 +157,19 @@ public class Device implements Serializable {
         this.timeout = timeout;
     }
 
+    public LocationFunctions getLocationfunction() {
+        return locationfunction;
+    }
+
+    public Device locationfunction(LocationFunctions locationfunction) {
+        this.locationfunction = locationfunction;
+        return this;
+    }
+
+    public void setLocationfunction(LocationFunctions locationfunction) {
+        this.locationfunction = locationfunction;
+    }
+
     public Site getSite() {
         return site;
     }
@@ -196,6 +215,7 @@ public class Device implements Serializable {
             ", pollingRate=" + getPollingRate() +
             ", jmsDomain='" + getJmsDomain() + "'" +
             ", timeout=" + getTimeout() +
+            ", locationfunction='" + getLocationfunction() + "'" +
             "}";
     }
 }

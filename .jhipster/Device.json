@@ -36,6 +36,11 @@
         {
             "fieldName": "timeout",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "locationfunction",
+            "fieldType": "LocationFunctions",
+            "fieldValues": "ENTRANCE,EXIT"
         }
     ],
     "changelogDate": "20180216162749",

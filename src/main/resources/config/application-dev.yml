@@ -32,9 +32,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5432/jh_test
-        username: postgres
-        password: postgres
+        url: jdbc:postgresql://localhost:5432/tpims0.1
+        username: tpims
+        password: tpims
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

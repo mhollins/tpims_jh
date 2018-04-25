@@ -1,5 +1,10 @@
 import { BaseEntity } from './../../shared';
 
+export const enum LocationFunctions {
+    'ENTRANCE',
+    'EXIT'
+}
+
 export class DeviceTpims implements BaseEntity {
     constructor(
         public id?: number,
@@ -10,6 +15,7 @@ export class DeviceTpims implements BaseEntity {
         public pollingRate?: number,
         public jmsDomain?: string,
         public timeout?: number,
+        public locationfunction?: LocationFunctions,
         public siteId?: number,
     ) {
     }

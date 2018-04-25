@@ -128,6 +128,20 @@ public class SiteStatusResource {
     }
 
     /**
+     * GET  /site-statuses/:id : get the "id" siteStatus.
+     *
+     * @param id the id of the siteStatusDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the siteStatusDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/site-statuses/bySiteId/{id}")
+    @Timed
+    public ResponseEntity<SiteStatusDTO> getSiteStatusBySiteId(@PathVariable Long id) {
+        log.debug("REST request to get SiteStatus by SiteId: {}", id);
+        SiteStatusDTO siteStatusDTO = siteStatusService.findOneBySiteId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(siteStatusDTO));
+    }
+
+    /**
      * SEARCH  /_search/site-statuses?query=:query : search for the siteStatus corresponding
      * to the query.
      *

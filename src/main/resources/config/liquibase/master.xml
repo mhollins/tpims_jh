@@ -16,6 +16,7 @@
     <include file="config/liquibase/changelog/20180216162747_added_entity_SiteStatus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180216162748_added_entity_HistoricSiteData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180216162749_added_entity_Device.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180322203709_added_entity_DeviceData.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180216162740_added_entity_constraints_District.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180216162741_added_entity_constraints_County.xml" relativeToChangelogFile="false"/>
@@ -27,5 +28,6 @@
     <include file="config/liquibase/changelog/20180216162747_added_entity_constraints_SiteStatus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180216162748_added_entity_constraints_HistoricSiteData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180216162749_added_entity_constraints_Device.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180322203709_added_entity_constraints_DeviceData.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

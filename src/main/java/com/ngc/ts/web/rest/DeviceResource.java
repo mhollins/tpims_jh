@@ -132,6 +132,21 @@ public class DeviceResource {
     }
 
     /**
+     * GET  /devices/byDeviceName/:name : get the "name" device.
+     *
+     * @param name the deviceName of the deviceDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the deviceDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/devices/byDeviceName/{name}")
+    @Timed
+    public ResponseEntity<DeviceDTO> getDeviceByDeviceName(@PathVariable String name) {
+        log.debug("REST request to get Device by name: {}", name);
+        Device device = deviceRepository.findByDeviceName(name);
+        DeviceDTO deviceDTO = deviceMapper.toDto(device);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(deviceDTO));
+    }
+
+    /**
      * DELETE  /devices/:id : delete the "id" device.
      *
      * @param id the id of the deviceDTO to delete

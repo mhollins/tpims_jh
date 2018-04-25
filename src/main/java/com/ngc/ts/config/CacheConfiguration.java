@@ -59,6 +59,7 @@ public class CacheConfiguration {
             cm.createCache(com.ngc.ts.domain.SiteStatus.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.HistoricSiteData.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.Device.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ngc.ts.domain.DeviceData.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

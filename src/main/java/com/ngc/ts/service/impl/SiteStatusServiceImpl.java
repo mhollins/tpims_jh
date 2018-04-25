@@ -82,6 +82,20 @@ public class SiteStatusServiceImpl implements SiteStatusService {
     }
 
     /**
+     * Get one siteStatus by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public SiteStatusDTO findOneBySiteId(Long id) {
+        log.debug("Request to get SiteStatus by SiteId : {}", id);
+        SiteStatus siteStatus = siteStatusRepository.findBySiteId(id);
+        return siteStatusMapper.toDto(siteStatus);
+    }
+
+    /**
      * Delete the siteStatus by id.
      *
      * @param id the id of the entity

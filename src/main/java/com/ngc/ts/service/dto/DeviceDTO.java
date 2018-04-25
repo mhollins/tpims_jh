@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import com.ngc.ts.domain.enumeration.LocationFunctions;
 
 /**
  * A DTO for the Device entity.
@@ -26,6 +27,8 @@ public class DeviceDTO implements Serializable {
     private String jmsDomain;
 
     private Integer timeout;
+
+    private LocationFunctions locationfunction;
 
     private Long siteId;
 
@@ -93,6 +96,14 @@ public class DeviceDTO implements Serializable {
         this.timeout = timeout;
     }
 
+    public LocationFunctions getLocationfunction() {
+        return locationfunction;
+    }
+
+    public void setLocationfunction(LocationFunctions locationfunction) {
+        this.locationfunction = locationfunction;
+    }
+
     public Long getSiteId() {
         return siteId;
     }
@@ -133,6 +144,7 @@ public class DeviceDTO implements Serializable {
             ", pollingRate=" + getPollingRate() +
             ", jmsDomain='" + getJmsDomain() + "'" +
             ", timeout=" + getTimeout() +
+            ", locationfunction='" + getLocationfunction() + "'" +
             "}";
     }
 }

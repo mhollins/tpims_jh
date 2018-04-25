@@ -11,6 +11,7 @@ import { TpimsLogosTpimsModule } from './logos-tpims/logos-tpims.module';
 import { TpimsSiteStatusTpimsModule } from './site-status-tpims/site-status-tpims.module';
 import { TpimsHistoricSiteDataTpimsModule } from './historic-site-data-tpims/historic-site-data-tpims.module';
 import { TpimsDeviceTpimsModule } from './device-tpims/device-tpims.module';
+import { TpimsDeviceDataTpimsModule } from './device-data-tpims/device-data-tpims.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TpimsDeviceTpimsModule } from './device-tpims/device-tpims.module';
         TpimsSiteStatusTpimsModule,
         TpimsHistoricSiteDataTpimsModule,
         TpimsDeviceTpimsModule,
+        TpimsDeviceDataTpimsModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

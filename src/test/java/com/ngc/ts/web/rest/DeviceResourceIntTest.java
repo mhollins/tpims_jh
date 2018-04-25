@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.ngc.ts.domain.enumeration.LocationFunctions;
 /**
  * Test class for the DeviceResource REST controller.
  *
@@ -61,6 +62,9 @@ public class DeviceResourceIntTest {
 
     private static final Integer DEFAULT_TIMEOUT = 1;
     private static final Integer UPDATED_TIMEOUT = 2;
+
+    private static final LocationFunctions DEFAULT_LOCATIONFUNCTION = LocationFunctions.ENTRANCE;
+    private static final LocationFunctions UPDATED_LOCATIONFUNCTION = LocationFunctions.EXIT;
 
     @Autowired
     private DeviceRepository deviceRepository;
@@ -112,7 +116,8 @@ public class DeviceResourceIntTest {
             .deviceAddress(DEFAULT_DEVICE_ADDRESS)
             .pollingRate(DEFAULT_POLLING_RATE)
             .jmsDomain(DEFAULT_JMS_DOMAIN)
-            .timeout(DEFAULT_TIMEOUT);
+            .timeout(DEFAULT_TIMEOUT)
+            .locationfunction(DEFAULT_LOCATIONFUNCTION);
         return device;
     }
 
@@ -145,6 +150,7 @@ public class DeviceResourceIntTest {
         assertThat(testDevice.getPollingRate()).isEqualTo(DEFAULT_POLLING_RATE);
         assertThat(testDevice.getJmsDomain()).isEqualTo(DEFAULT_JMS_DOMAIN);
         assertThat(testDevice.getTimeout()).isEqualTo(DEFAULT_TIMEOUT);
+        assertThat(testDevice.getLocationfunction()).isEqualTo(DEFAULT_LOCATIONFUNCTION);
 
         // Validate the Device in Elasticsearch
         Device deviceEs = deviceSearchRepository.findOne(testDevice.getId());
@@ -188,7 +194,8 @@ public class DeviceResourceIntTest {
             .andExpect(jsonPath("$.[*].deviceAddress").value(hasItem(DEFAULT_DEVICE_ADDRESS)))
             .andExpect(jsonPath("$.[*].pollingRate").value(hasItem(DEFAULT_POLLING_RATE)))
             .andExpect(jsonPath("$.[*].jmsDomain").value(hasItem(DEFAULT_JMS_DOMAIN.toString())))
-            .andExpect(jsonPath("$.[*].timeout").value(hasItem(DEFAULT_TIMEOUT)));
+            .andExpect(jsonPath("$.[*].timeout").value(hasItem(DEFAULT_TIMEOUT)))
+            .andExpect(jsonPath("$.[*].locationfunction").value(hasItem(DEFAULT_LOCATIONFUNCTION.toString())));
     }
 
     @Test
@@ -208,7 +215,8 @@ public class DeviceResourceIntTest {
             .andExpect(jsonPath("$.deviceAddress").value(DEFAULT_DEVICE_ADDRESS))
             .andExpect(jsonPath("$.pollingRate").value(DEFAULT_POLLING_RATE))
             .andExpect(jsonPath("$.jmsDomain").value(DEFAULT_JMS_DOMAIN.toString()))
-            .andExpect(jsonPath("$.timeout").value(DEFAULT_TIMEOUT));
+            .andExpect(jsonPath("$.timeout").value(DEFAULT_TIMEOUT))
+            .andExpect(jsonPath("$.locationfunction").value(DEFAULT_LOCATIONFUNCTION.toString()));
     }
 
     @Test
@@ -238,7 +246,8 @@ public class DeviceResourceIntTest {
             .deviceAddress(UPDATED_DEVICE_ADDRESS)
             .pollingRate(UPDATED_POLLING_RATE)
             .jmsDomain(UPDATED_JMS_DOMAIN)
-            .timeout(UPDATED_TIMEOUT);
+            .timeout(UPDATED_TIMEOUT)
+            .locationfunction(UPDATED_LOCATIONFUNCTION);
         DeviceDTO deviceDTO = deviceMapper.toDto(updatedDevice);
 
         restDeviceMockMvc.perform(put("/api/devices")
@@ -257,6 +266,7 @@ public class DeviceResourceIntTest {
         assertThat(testDevice.getPollingRate()).isEqualTo(UPDATED_POLLING_RATE);
         assertThat(testDevice.getJmsDomain()).isEqualTo(UPDATED_JMS_DOMAIN);
         assertThat(testDevice.getTimeout()).isEqualTo(UPDATED_TIMEOUT);
+        assertThat(testDevice.getLocationfunction()).isEqualTo(UPDATED_LOCATIONFUNCTION);
 
         // Validate the Device in Elasticsearch
         Device deviceEs = deviceSearchRepository.findOne(testDevice.getId());
@@ -322,7 +332,8 @@ public class DeviceResourceIntTest {
             .andExpect(jsonPath("$.[*].deviceAddress").value(hasItem(DEFAULT_DEVICE_ADDRESS)))
             .andExpect(jsonPath("$.[*].pollingRate").value(hasItem(DEFAULT_POLLING_RATE)))
             .andExpect(jsonPath("$.[*].jmsDomain").value(hasItem(DEFAULT_JMS_DOMAIN.toString())))
-            .andExpect(jsonPath("$.[*].timeout").value(hasItem(DEFAULT_TIMEOUT)));
+            .andExpect(jsonPath("$.[*].timeout").value(hasItem(DEFAULT_TIMEOUT)))
+            .andExpect(jsonPath("$.[*].locationfunction").value(hasItem(DEFAULT_LOCATIONFUNCTION.toString())));
     }
 
     @Test

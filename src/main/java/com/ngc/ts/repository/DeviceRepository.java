@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Long> {
-
+    Device findByDeviceName(String deviceName);
 }

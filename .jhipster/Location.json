@@ -1,0 +1,69 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "county",
+            "otherEntityName": "county",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "locationType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "locationOwner",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "relevantHighway",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "referencePost",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "exitId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "directionOfTravel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "streetAdr",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "postalCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeZone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180216162742",
+    "javadoc": "Site Location",
+    "entityTableName": "location",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "tpims"
+}

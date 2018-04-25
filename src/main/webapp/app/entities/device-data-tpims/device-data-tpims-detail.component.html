@@ -1,0 +1,56 @@
+
+<div *ngIf="deviceData">
+    <h2><span>Device Data</span> {{deviceData.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Time Stamp</span></dt>
+        <dd>
+            <span>{{deviceData.timeStamp | date:'medium'}}</span>
+        </dd>
+        <dt><span>Device Name</span></dt>
+        <dd>
+            <span>{{deviceData.deviceName}}</span>
+        </dd>
+        <dt><span>Zone</span></dt>
+        <dd>
+            <span>{{deviceData.zone}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{deviceData.status}}</span>
+        </dd>
+        <dt><span>Speed</span></dt>
+        <dd>
+            <span>{{deviceData.speed}}</span>
+        </dd>
+        <dt><span>Volume</span></dt>
+        <dd>
+            <span>{{deviceData.volume}}</span>
+        </dd>
+        <dt><span>Occupancy</span></dt>
+        <dd>
+            <span>{{deviceData.occupancy}}</span>
+        </dd>
+        <dt><span>Device</span></dt>
+        <dd>
+            <div *ngIf="deviceData.deviceId">
+                <a [routerLink]="['/device-tpims', deviceData.deviceId]">{{deviceData.deviceId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'device-data-tpims/'+ deviceData.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

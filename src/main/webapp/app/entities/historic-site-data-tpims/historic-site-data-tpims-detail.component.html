@@ -1,0 +1,62 @@
+
+<div *ngIf="historicSiteData">
+    <h2><span>Historic Site Data</span> {{historicSiteData.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Total Capacity</span></dt>
+        <dd>
+            <span>{{historicSiteData.totalCapacity}}</span>
+        </dd>
+        <dt><span>Availability</span></dt>
+        <dd>
+            <span>{{historicSiteData.availability}}</span>
+        </dd>
+        <dt><span>Trend</span></dt>
+        <dd>
+            <span>{{historicSiteData.trend}}</span>
+        </dd>
+        <dt><span>Open</span></dt>
+        <dd>
+            <span>{{historicSiteData.open}}</span>
+        </dd>
+        <dt><span>Trust Data</span></dt>
+        <dd>
+            <span>{{historicSiteData.trustData}}</span>
+        </dd>
+        <dt><span>Time Stamp</span></dt>
+        <dd>
+            <span>{{historicSiteData.timeStamp | date:'medium'}}</span>
+        </dd>
+        <dt><span ngbTooltip="notes whether available spots
+is based on a manual reset">Verification Check</span></dt>
+        <dd>
+            <span>{{historicSiteData.verificationCheck}}</span>
+        </dd>
+        <dt><span ngbTooltip="actual number availble, can
+exceed capacity &amp; go below low threshold">True Available</span></dt>
+        <dd>
+            <span>{{historicSiteData.trueAvailable}}</span>
+        </dd>
+        <dt><span>Site</span></dt>
+        <dd>
+            <div *ngIf="historicSiteData.siteId">
+                <a [routerLink]="['/site-tpims', historicSiteData.siteId]">{{historicSiteData.siteId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'historic-site-data-tpims/'+ historicSiteData.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

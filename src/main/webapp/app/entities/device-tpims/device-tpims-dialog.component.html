@@ -1,0 +1,74 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDeviceLabel">Create or edit a Device</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!device.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="device.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_deviceName">Device Name</label>
+            <input type="text" class="form-control" name="deviceName" id="field_deviceName"
+                [(ngModel)]="device.deviceName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_ipAddress">Ip Address</label>
+            <input type="text" class="form-control" name="ipAddress" id="field_ipAddress"
+                [(ngModel)]="device.ipAddress" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_ipPort">Ip Port</label>
+            <input type="number" class="form-control" name="ipPort" id="field_ipPort"
+                [(ngModel)]="device.ipPort" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_deviceAddress">Device Address</label>
+            <input type="number" class="form-control" name="deviceAddress" id="field_deviceAddress"
+                [(ngModel)]="device.deviceAddress" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_pollingRate">Polling Rate</label>
+            <input type="number" class="form-control" name="pollingRate" id="field_pollingRate"
+                [(ngModel)]="device.pollingRate" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_jmsDomain">Jms Domain</label>
+            <input type="text" class="form-control" name="jmsDomain" id="field_jmsDomain"
+                [(ngModel)]="device.jmsDomain" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_timeout">Timeout</label>
+            <input type="number" class="form-control" name="timeout" id="field_timeout"
+                [(ngModel)]="device.timeout" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_locationfunction">Locationfunction</label>
+            <select class="form-control" name="locationfunction" [(ngModel)]="device.locationfunction" id="field_locationfunction" >
+                <option value="ENTRANCE">ENTRANCE</option>
+                <option value="EXIT">EXIT</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_site">Site</label>
+            <select class="form-control" id="field_site" name="site" [(ngModel)]="device.siteId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

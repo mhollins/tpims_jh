@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "site",
+            "otherEntityName": "site",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "totalCapacity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "availability",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "trend",
+            "fieldType": "TrendOptions",
+            "fieldValues": "EMPTYING,STEADY,FILLING"
+        },
+        {
+            "fieldName": "open",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "trustData",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "timeStamp",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "verificationCheck",
+            "javadoc": "notes whether available spots\nis based on a manual reset",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "trueAvailable",
+            "javadoc": "actual number availble, can\nexceed capacity & go below low threshold",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180216162748",
+    "entityTableName": "historic_site_data",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "tpims"
+}

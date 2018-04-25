@@ -1,0 +1,52 @@
+
+<div *ngIf="site">
+    <h2><span>Site</span> {{site.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Site Id</span></dt>
+        <dd>
+            <span>{{site.siteId}}</span>
+        </dd>
+        <dt><span>Site Name</span></dt>
+        <dd>
+            <span>{{site.siteName}}</span>
+        </dd>
+        <dt><span>Total Capacity</span></dt>
+        <dd>
+            <span>{{site.totalCapacity}}</span>
+        </dd>
+        <dt><span>Low Threshold</span></dt>
+        <dd>
+            <span>{{site.lowThreshold}}</span>
+        </dd>
+        <dt><span>Static Data Updated</span></dt>
+        <dd>
+            <span>{{site.staticDataUpdated | date:'medium'}}</span>
+        </dd>
+        <dt><span>Ownership</span></dt>
+        <dd>
+            <span>{{site.ownership}}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <div *ngIf="site.locationId">
+                <a [routerLink]="['/location-tpims', site.locationId]">{{site.locationId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'site-tpims/'+ site.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

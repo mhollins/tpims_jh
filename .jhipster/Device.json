@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "site",
+            "otherEntityName": "site",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "deviceName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ipAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ipPort",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "deviceAddress",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pollingRate",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "jmsDomain",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeout",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "locationfunction",
+            "fieldType": "LocationFunctions",
+            "fieldValues": "ENTRANCE,EXIT"
+        }
+    ],
+    "changelogDate": "20180216162749",
+    "javadoc": "Static Device Configuration",
+    "entityTableName": "device",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "tpims"
+}

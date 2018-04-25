@@ -1,0 +1,91 @@
+<div>
+    <h2>
+        <span>Historic Site Data</span>
+        <button class="btn btn-primary float-right jh-create-entity create-historic-site-data-tpims" [routerLink]="['/', { outlets: { popup: ['historic-site-data-tpims-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Historic Site Data
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="historicSiteData">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="totalCapacity"><span>Total Capacity</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="availability"><span>Availability</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="trend"><span>Trend</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="open"><span>Open</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="trustData"><span>Trust Data</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="timeStamp"><span>Time Stamp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="verificationCheck"><span>Verification Check</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="trueAvailable"><span>True Available</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="siteId"><span>Site</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let historicSiteData of historicSiteData ;trackBy: trackId">
+                <td><a [routerLink]="['../historic-site-data-tpims', historicSiteData.id ]">{{historicSiteData.id}}</a></td>
+                <td>{{historicSiteData.totalCapacity}}</td>
+                <td>{{historicSiteData.availability}}</td>
+                <td>{{historicSiteData.trend}}</td>
+                <td>{{historicSiteData.open}}</td>
+                <td>{{historicSiteData.trustData}}</td>
+                <td>{{historicSiteData.timeStamp | date:'medium'}}</td>
+                <td>{{historicSiteData.verificationCheck}}</td>
+                <td>{{historicSiteData.trueAvailable}}</td>
+                <td>
+                    <div *ngIf="historicSiteData.siteId">
+                        <a [routerLink]="['../site-tpims', historicSiteData.siteId  ]" >{{historicSiteData.siteId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../historic-site-data-tpims', historicSiteData.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'historic-site-data-tpims/'+ historicSiteData.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'historic-site-data-tpims/'+ historicSiteData.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

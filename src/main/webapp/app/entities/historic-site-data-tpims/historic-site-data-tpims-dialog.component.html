@@ -1,0 +1,79 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myHistoricSiteDataLabel">Create or edit a Historic Site Data</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!historicSiteData.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="historicSiteData.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_totalCapacity">Total Capacity</label>
+            <input type="number" class="form-control" name="totalCapacity" id="field_totalCapacity"
+                [(ngModel)]="historicSiteData.totalCapacity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_availability">Availability</label>
+            <input type="number" class="form-control" name="availability" id="field_availability"
+                [(ngModel)]="historicSiteData.availability" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trend">Trend</label>
+            <select class="form-control" name="trend" [(ngModel)]="historicSiteData.trend" id="field_trend" >
+                <option value="EMPTYING">EMPTYING</option>
+                <option value="STEADY">STEADY</option>
+                <option value="FILLING">FILLING</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_open">Open</label>
+            <input type="checkbox" class="form-control" name="open" id="field_open"
+                [(ngModel)]="historicSiteData.open" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trustData">Trust Data</label>
+            <input type="checkbox" class="form-control" name="trustData" id="field_trustData"
+                [(ngModel)]="historicSiteData.trustData" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_timeStamp">Time Stamp</label>
+            <div class="d-flex">
+                <input id="field_timeStamp" type="datetime-local" class="form-control" name="timeStamp" [(ngModel)]="historicSiteData.timeStamp"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_verificationCheck" ngbTooltip="notes whether available spots
+is based on a manual reset">Verification Check</label>
+            <input type="checkbox" class="form-control" name="verificationCheck" id="field_verificationCheck"
+                [(ngModel)]="historicSiteData.verificationCheck" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trueAvailable" ngbTooltip="actual number availble, can
+exceed capacity &amp; go below low threshold">True Available</label>
+            <input type="number" class="form-control" name="trueAvailable" id="field_trueAvailable"
+                [(ngModel)]="historicSiteData.trueAvailable" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_site">Site</label>
+            <select class="form-control" id="field_site" name="site" [(ngModel)]="historicSiteData.siteId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -42,8 +42,6 @@ public class CacheConfiguration {
             cm.createCache(com.ngc.ts.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.User.class.getName() + ".authorities", jcacheConfiguration);
-            cm.createCache(com.ngc.ts.domain.PersistentToken.class.getName(), jcacheConfiguration);
-            cm.createCache(com.ngc.ts.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.State.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.District.class.getName(), jcacheConfiguration);
             cm.createCache(com.ngc.ts.domain.County.class.getName(), jcacheConfiguration);

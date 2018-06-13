@@ -7,13 +7,13 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!site.id">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="site.id" readonly />
-        </div>
+        <!--<div class="form-group" [hidden]="!site.id">-->
+            <!--<label for="id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                   <!--[(ngModel)]="site.id" readonly />-->
+        <!--</div>-->
         <div class="form-group">
-            <label class="form-control-label" for="field_siteId">Site Id</label>
+            <label class="form-control-label" for="field_siteId">Site ID</label>
             <input type="text" class="form-control" name="siteId" id="field_siteId"
                 [(ngModel)]="site.siteId" required/>
             <div [hidden]="!(editForm.controls.siteId?.dirty && editForm.controls.siteId?.invalid)">
@@ -38,18 +38,18 @@
             <input type="number" class="form-control" name="lowThreshold" id="field_lowThreshold"
                 [(ngModel)]="site.lowThreshold" />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" for="field_staticDataUpdated">Static Data Updated</label>
-            <div class="d-flex">
-                <input id="field_staticDataUpdated" type="datetime-local" class="form-control" name="staticDataUpdated" [(ngModel)]="site.staticDataUpdated"
-                />
-            </div>
-        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_staticDataUpdated">Static Data Updated</label>-->
+            <!--<div class="d-flex">-->
+                <!--<input id="field_staticDataUpdated" type="datetime-local" class="form-control" name="staticDataUpdated" [(ngModel)]="site.staticDataUpdated"-->
+                <!--/>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="form-group">
             <label class="form-control-label" for="field_ownership">Ownership</label>
             <select class="form-control" name="ownership" [(ngModel)]="site.ownership" id="field_ownership" >
-                <option value="PR">PR</option>
-                <option value="PU">PU</option>
+                <option value="PR">Private</option>
+                <option value="PU">Public</option>
             </select>
         </div>
 
@@ -57,7 +57,7 @@
             <label class="form-control-label" for="field_location">Location</label>
             <select class="form-control" id="field_location" name="location" [(ngModel)]="site.locationId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.id}}</option>
+                <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption}}</option>
             </select>
         </div>
     </div>

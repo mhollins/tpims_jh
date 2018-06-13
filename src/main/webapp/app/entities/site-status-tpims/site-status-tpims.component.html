@@ -1,6 +1,6 @@
 <div>
     <h2>
-        <span>Site Statuses</span>
+        <span>Site Status</span>
         <button class="btn btn-primary float-right jh-create-entity create-site-status-tpims" [routerLink]="['/', { outlets: { popup: ['site-status-tpims-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down" >
@@ -29,31 +29,31 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="siteId"><span>Site</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reportedAvailable"><span>Reported Available</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trend"><span>Trend</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="open"><span>Open</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trustData"><span>Trust Data</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastDeviceUpdate"><span>Last Device Update</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastOperatorUpdate"><span>Last Operator Update</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="siteId"><span>Site</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let siteStatus of siteStatuses ;trackBy: trackId">
-                <td><a [routerLink]="['../site-status-tpims', siteStatus.id ]">{{siteStatus.id}}</a></td>
+                <!--<td><a [routerLink]="['../site-status-tpims', siteStatus.id ]">{{siteStatus.id}}</a></td>-->
+                <td>
+                    <div *ngIf="siteStatus.siteId">
+                        <a [routerLink]="['../site-tpims', siteStatus.siteId  ]" >{{siteStatus.siteId}}</a>
+                    </div>
+                </td>
                 <td>{{siteStatus.reportedAvailable}}</td>
                 <td>{{siteStatus.trend}}</td>
                 <td>{{siteStatus.open}}</td>
                 <td>{{siteStatus.trustData}}</td>
                 <td>{{siteStatus.lastDeviceUpdate | date:'medium'}}</td>
                 <td>{{siteStatus.lastOperatorUpdate | date:'medium'}}</td>
-                <td>
-                    <div *ngIf="siteStatus.siteId">
-                        <a [routerLink]="['../site-tpims', siteStatus.siteId  ]" >{{siteStatus.siteId}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -29,33 +29,33 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="deviceName"><span>Device Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="ipAddress"><span>Ip Address</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="ipPort"><span>Ip Port</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="deviceAddress"><span>Device Address</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="pollingRate"><span>Polling Rate</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="jmsDomain"><span>Jms Domain</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="timeout"><span>Timeout</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="locationfunction"><span>Locationfunction</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="siteId"><span>Site</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="ipAddress"><span>IP Address</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="ipPort"><span>IP Port</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="deviceAddress"><span>Device Address</span> <span class="fa fa-sort"></span></th>-->
+            <!--<th jhiSortBy="pollingRate"><span>Polling Rate</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="jmsDomain"><span>JMS Domain</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="timeout"><span>Timeout</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="locationfunction"><span>Location Function</span> <span class="fa fa-sort"></span></th>
+            <th><span>Site</span> </th>
             <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let device of devices ;trackBy: trackId">
-                <td><a [routerLink]="['../device-tpims', device.id ]">{{device.id}}</a></td>
+                <!--<td><a [routerLink]="['../device-tpims', device.id ]">{{device.id}}</a></td>-->
                 <td>{{device.deviceName}}</td>
                 <td>{{device.ipAddress}}</td>
                 <td>{{device.ipPort}}</td>
-                <td>{{device.deviceAddress}}</td>
-                <td>{{device.pollingRate}}</td>
+                <!--<td>{{device.deviceAddress}}</td>-->
+                <!--<td>{{device.pollingRate}}</td>-->
                 <td>{{device.jmsDomain}}</td>
-                <td>{{device.timeout}}</td>
+                <!--<td>{{device.timeout}}</td>-->
                 <td>{{device.locationfunction}}</td>
                 <td>
                     <div *ngIf="device.siteId">
-                        <a [routerLink]="['../site-tpims', device.siteId  ]" >{{device.siteId}}</a>
+                        <a [routerLink]="['../site-tpims', device.siteId  ]" >View</a>
                     </div>
                 </td>
                 <td class="text-right">

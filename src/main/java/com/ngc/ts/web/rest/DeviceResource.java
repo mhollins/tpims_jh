@@ -147,6 +147,21 @@ public class DeviceResource {
     }
 
     /**
+     * GET  /devices/byDeviceName/:name : get the "name" device.
+     *
+     * @param name the deviceName of the deviceDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the deviceDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/devices/bySiteId/{id}")
+    @Timed
+    public ResponseEntity<List<DeviceDTO>> getDevicesBySiteId(@PathVariable Long id) {
+        log.debug("REST request to get Devices by site.id: {}", id);
+        List<Device> devices = deviceRepository.findBySiteId(id);
+        List<DeviceDTO> deviceDTOs = deviceMapper.toDto(devices);
+        return new ResponseEntity<>(deviceDTOs, HttpStatus.OK);
+    }
+
+    /**
      * DELETE  /devices/:id : delete the "id" device.
      *
      * @param id the id of the deviceDTO to delete

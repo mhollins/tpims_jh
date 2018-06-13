@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the Device entity.
@@ -13,4 +15,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Long> {
     Device findByDeviceName(String deviceName);
+    List<Device> findBySiteId(Long id);
 }

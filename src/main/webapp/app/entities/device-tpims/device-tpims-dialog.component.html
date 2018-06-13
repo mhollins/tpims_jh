@@ -7,23 +7,23 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!device.id">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="device.id" readonly />
-        </div>
+        <!--<div class="form-group" [hidden]="!device.id">-->
+            <!--<label for="id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                   <!--[(ngModel)]="device.id" readonly />-->
+        <!--</div>-->
         <div class="form-group">
             <label class="form-control-label" for="field_deviceName">Device Name</label>
             <input type="text" class="form-control" name="deviceName" id="field_deviceName"
                 [(ngModel)]="device.deviceName" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_ipAddress">Ip Address</label>
+            <label class="form-control-label" for="field_ipAddress">IP Address</label>
             <input type="text" class="form-control" name="ipAddress" id="field_ipAddress"
                 [(ngModel)]="device.ipAddress" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_ipPort">Ip Port</label>
+            <label class="form-control-label" for="field_ipPort">IP Port</label>
             <input type="number" class="form-control" name="ipPort" id="field_ipPort"
                 [(ngModel)]="device.ipPort" />
         </div>
@@ -38,7 +38,7 @@
                 [(ngModel)]="device.pollingRate" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_jmsDomain">Jms Domain</label>
+            <label class="form-control-label" for="field_jmsDomain">JMS Domain</label>
             <input type="text" class="form-control" name="jmsDomain" id="field_jmsDomain"
                 [(ngModel)]="device.jmsDomain" />
         </div>
@@ -48,7 +48,7 @@
                 [(ngModel)]="device.timeout" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_locationfunction">Locationfunction</label>
+            <label class="form-control-label" for="field_locationfunction">Location Function</label>
             <select class="form-control" name="locationfunction" [(ngModel)]="device.locationfunction" id="field_locationfunction" >
                 <option value="ENTRANCE">ENTRANCE</option>
                 <option value="EXIT">EXIT</option>
@@ -59,7 +59,7 @@
             <label class="form-control-label" for="field_site">Site</label>
             <select class="form-control" id="field_site" name="site" [(ngModel)]="device.siteId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.id}}</option>
+                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.siteId}}</option>
             </select>
         </div>
     </div>

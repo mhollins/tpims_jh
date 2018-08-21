@@ -1,7 +1,7 @@
 package com.ngc.ts.service.dto;
 
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,7 +25,7 @@ public class SiteDTO implements Serializable {
 
     private Integer lowThreshold;
 
-    private ZonedDateTime staticDataUpdated;
+    private Instant staticDataUpdated;
 
     private OwnerShipOptions ownership;
 
@@ -71,11 +71,11 @@ public class SiteDTO implements Serializable {
         this.lowThreshold = lowThreshold;
     }
 
-    public ZonedDateTime getStaticDataUpdated() {
+    public Instant getStaticDataUpdated() {
         return staticDataUpdated;
     }
 
-    public void setStaticDataUpdated(ZonedDateTime staticDataUpdated) {
+    public void setStaticDataUpdated(Instant staticDataUpdated) {
         this.staticDataUpdated = staticDataUpdated;
     }
 

@@ -63,7 +63,7 @@
         },
         {
             "fieldName": "staticDataUpdated",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "Instant"
         },
         {
             "fieldName": "ownership",

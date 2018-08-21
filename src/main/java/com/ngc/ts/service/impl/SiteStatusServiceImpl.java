@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.Instant;
+import java.time.ZoneId;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -50,6 +53,33 @@ public class SiteStatusServiceImpl implements SiteStatusService {
         siteStatus = siteStatusRepository.save(siteStatus);
         SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
         siteStatusSearchRepository.save(siteStatus);
+        return result;
+    }
+
+    /**
+     * Save a siteStatus.
+     *
+     * @param siteStatusDTO the entity to save
+     * @return the persisted entity
+     */
+    @Override
+    public SiteStatusDTO update(SiteStatusDTO siteStatusDTO) {
+        log.debug("Request to update SiteStatus : {}", siteStatusDTO);
+        SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
+
+        // set operator update time
+        siteStatus.setLastOperatorUpdate(Instant.now());
+
+        // calculate verification amplitude
+        SiteStatus previous = siteStatusRepository.findOne(siteStatus.getId());
+        if (previous != null) {
+            siteStatus.setVerificationCheckAmplitude(siteStatus.getReportedAvailable() - previous.getReportedAvailable());
+        }
+
+        siteStatus = siteStatusRepository.save(siteStatus);
+        siteStatusSearchRepository.save(siteStatus);
+
+        SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
         return result;
     }
 

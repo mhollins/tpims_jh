@@ -1,7 +1,7 @@
 package com.ngc.ts.service.dto;
 
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,9 +23,11 @@ public class SiteStatusDTO implements Serializable {
 
     private Boolean trustData;
 
-    private ZonedDateTime lastDeviceUpdate;
+    private Instant lastDeviceUpdate;
 
-    private ZonedDateTime lastOperatorUpdate;
+    private Instant lastOperatorUpdate;
+
+    private Integer verificationCheckAmplitude;
 
     private Long siteId;
 
@@ -69,20 +71,28 @@ public class SiteStatusDTO implements Serializable {
         this.trustData = trustData;
     }
 
-    public ZonedDateTime getLastDeviceUpdate() {
+    public Instant getLastDeviceUpdate() {
         return lastDeviceUpdate;
     }
 
-    public void setLastDeviceUpdate(ZonedDateTime lastDeviceUpdate) {
+    public void setLastDeviceUpdate(Instant lastDeviceUpdate) {
         this.lastDeviceUpdate = lastDeviceUpdate;
     }
 
-    public ZonedDateTime getLastOperatorUpdate() {
+    public Instant getLastOperatorUpdate() {
         return lastOperatorUpdate;
     }
 
-    public void setLastOperatorUpdate(ZonedDateTime lastOperatorUpdate) {
+    public void setLastOperatorUpdate(Instant lastOperatorUpdate) {
         this.lastOperatorUpdate = lastOperatorUpdate;
+    }
+
+    public Integer getVerificationCheckAmplitude() {
+        return verificationCheckAmplitude;
+    }
+
+    public void setVerificationCheckAmplitude(Integer verificationCheckAmplitude) {
+        this.verificationCheckAmplitude = verificationCheckAmplitude;
     }
 
     public Long getSiteId() {
@@ -124,6 +134,7 @@ public class SiteStatusDTO implements Serializable {
             ", trustData='" + isTrustData() + "'" +
             ", lastDeviceUpdate='" + getLastDeviceUpdate() + "'" +
             ", lastOperatorUpdate='" + getLastOperatorUpdate() + "'" +
+            ", verificationCheckAmplitude=" + getVerificationCheckAmplitude() +
             "}";
     }
 }

@@ -26,12 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static com.ngc.ts.web.rest.TestUtil.sameInstant;
 import static com.ngc.ts.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -60,11 +57,14 @@ public class SiteStatusResourceIntTest {
     private static final Boolean DEFAULT_TRUST_DATA = false;
     private static final Boolean UPDATED_TRUST_DATA = true;
 
-    private static final ZonedDateTime DEFAULT_LAST_DEVICE_UPDATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_LAST_DEVICE_UPDATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Instant DEFAULT_LAST_DEVICE_UPDATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_DEVICE_UPDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final ZonedDateTime DEFAULT_LAST_OPERATOR_UPDATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_LAST_OPERATOR_UPDATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Instant DEFAULT_LAST_OPERATOR_UPDATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_OPERATOR_UPDATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Integer DEFAULT_VERIFICATION_CHECK_AMPLITUDE = 1;
+    private static final Integer UPDATED_VERIFICATION_CHECK_AMPLITUDE = 2;
 
     @Autowired
     private SiteStatusRepository siteStatusRepository;
@@ -118,7 +118,8 @@ public class SiteStatusResourceIntTest {
             .open(DEFAULT_OPEN)
             .trustData(DEFAULT_TRUST_DATA)
             .lastDeviceUpdate(DEFAULT_LAST_DEVICE_UPDATE)
-            .lastOperatorUpdate(DEFAULT_LAST_OPERATOR_UPDATE);
+            .lastOperatorUpdate(DEFAULT_LAST_OPERATOR_UPDATE)
+            .verificationCheckAmplitude(DEFAULT_VERIFICATION_CHECK_AMPLITUDE);
         return siteStatus;
     }
 
@@ -150,12 +151,11 @@ public class SiteStatusResourceIntTest {
         assertThat(testSiteStatus.isTrustData()).isEqualTo(DEFAULT_TRUST_DATA);
         assertThat(testSiteStatus.getLastDeviceUpdate()).isEqualTo(DEFAULT_LAST_DEVICE_UPDATE);
         assertThat(testSiteStatus.getLastOperatorUpdate()).isEqualTo(DEFAULT_LAST_OPERATOR_UPDATE);
+        assertThat(testSiteStatus.getVerificationCheckAmplitude()).isEqualTo(DEFAULT_VERIFICATION_CHECK_AMPLITUDE);
 
         // Validate the SiteStatus in Elasticsearch
         SiteStatus siteStatusEs = siteStatusSearchRepository.findOne(testSiteStatus.getId());
-        assertThat(testSiteStatus.getLastDeviceUpdate()).isEqualTo(testSiteStatus.getLastDeviceUpdate());
-        assertThat(testSiteStatus.getLastOperatorUpdate()).isEqualTo(testSiteStatus.getLastOperatorUpdate());
-        assertThat(siteStatusEs).isEqualToIgnoringGivenFields(testSiteStatus, "lastDeviceUpdate", "lastOperatorUpdate");
+        assertThat(siteStatusEs).isEqualToIgnoringGivenFields(testSiteStatus);
     }
 
     @Test
@@ -193,8 +193,9 @@ public class SiteStatusResourceIntTest {
             .andExpect(jsonPath("$.[*].trend").value(hasItem(DEFAULT_TREND.toString())))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].trustData").value(hasItem(DEFAULT_TRUST_DATA.booleanValue())))
-            .andExpect(jsonPath("$.[*].lastDeviceUpdate").value(hasItem(sameInstant(DEFAULT_LAST_DEVICE_UPDATE))))
-            .andExpect(jsonPath("$.[*].lastOperatorUpdate").value(hasItem(sameInstant(DEFAULT_LAST_OPERATOR_UPDATE))));
+            .andExpect(jsonPath("$.[*].lastDeviceUpdate").value(hasItem(DEFAULT_LAST_DEVICE_UPDATE.toString())))
+            .andExpect(jsonPath("$.[*].lastOperatorUpdate").value(hasItem(DEFAULT_LAST_OPERATOR_UPDATE.toString())))
+            .andExpect(jsonPath("$.[*].verificationCheckAmplitude").value(hasItem(DEFAULT_VERIFICATION_CHECK_AMPLITUDE)));
     }
 
     @Test
@@ -212,8 +213,9 @@ public class SiteStatusResourceIntTest {
             .andExpect(jsonPath("$.trend").value(DEFAULT_TREND.toString()))
             .andExpect(jsonPath("$.open").value(DEFAULT_OPEN.booleanValue()))
             .andExpect(jsonPath("$.trustData").value(DEFAULT_TRUST_DATA.booleanValue()))
-            .andExpect(jsonPath("$.lastDeviceUpdate").value(sameInstant(DEFAULT_LAST_DEVICE_UPDATE)))
-            .andExpect(jsonPath("$.lastOperatorUpdate").value(sameInstant(DEFAULT_LAST_OPERATOR_UPDATE)));
+            .andExpect(jsonPath("$.lastDeviceUpdate").value(DEFAULT_LAST_DEVICE_UPDATE.toString()))
+            .andExpect(jsonPath("$.lastOperatorUpdate").value(DEFAULT_LAST_OPERATOR_UPDATE.toString()))
+            .andExpect(jsonPath("$.verificationCheckAmplitude").value(DEFAULT_VERIFICATION_CHECK_AMPLITUDE));
     }
 
     @Test
@@ -242,7 +244,8 @@ public class SiteStatusResourceIntTest {
             .open(UPDATED_OPEN)
             .trustData(UPDATED_TRUST_DATA)
             .lastDeviceUpdate(UPDATED_LAST_DEVICE_UPDATE)
-            .lastOperatorUpdate(UPDATED_LAST_OPERATOR_UPDATE);
+            .lastOperatorUpdate(UPDATED_LAST_OPERATOR_UPDATE)
+            .verificationCheckAmplitude(UPDATED_VERIFICATION_CHECK_AMPLITUDE);
         SiteStatusDTO siteStatusDTO = siteStatusMapper.toDto(updatedSiteStatus);
 
         restSiteStatusMockMvc.perform(put("/api/site-statuses")
@@ -260,12 +263,11 @@ public class SiteStatusResourceIntTest {
         assertThat(testSiteStatus.isTrustData()).isEqualTo(UPDATED_TRUST_DATA);
         assertThat(testSiteStatus.getLastDeviceUpdate()).isEqualTo(UPDATED_LAST_DEVICE_UPDATE);
         assertThat(testSiteStatus.getLastOperatorUpdate()).isEqualTo(UPDATED_LAST_OPERATOR_UPDATE);
+        assertThat(testSiteStatus.getVerificationCheckAmplitude()).isEqualTo(UPDATED_VERIFICATION_CHECK_AMPLITUDE);
 
         // Validate the SiteStatus in Elasticsearch
         SiteStatus siteStatusEs = siteStatusSearchRepository.findOne(testSiteStatus.getId());
-        assertThat(testSiteStatus.getLastDeviceUpdate()).isEqualTo(testSiteStatus.getLastDeviceUpdate());
-        assertThat(testSiteStatus.getLastOperatorUpdate()).isEqualTo(testSiteStatus.getLastOperatorUpdate());
-        assertThat(siteStatusEs).isEqualToIgnoringGivenFields(testSiteStatus, "lastDeviceUpdate", "lastOperatorUpdate");
+        assertThat(siteStatusEs).isEqualToIgnoringGivenFields(testSiteStatus);
     }
 
     @Test
@@ -325,8 +327,9 @@ public class SiteStatusResourceIntTest {
             .andExpect(jsonPath("$.[*].trend").value(hasItem(DEFAULT_TREND.toString())))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].trustData").value(hasItem(DEFAULT_TRUST_DATA.booleanValue())))
-            .andExpect(jsonPath("$.[*].lastDeviceUpdate").value(hasItem(sameInstant(DEFAULT_LAST_DEVICE_UPDATE))))
-            .andExpect(jsonPath("$.[*].lastOperatorUpdate").value(hasItem(sameInstant(DEFAULT_LAST_OPERATOR_UPDATE))));
+            .andExpect(jsonPath("$.[*].lastDeviceUpdate").value(hasItem(DEFAULT_LAST_DEVICE_UPDATE.toString())))
+            .andExpect(jsonPath("$.[*].lastOperatorUpdate").value(hasItem(DEFAULT_LAST_OPERATOR_UPDATE.toString())))
+            .andExpect(jsonPath("$.[*].verificationCheckAmplitude").value(hasItem(DEFAULT_VERIFICATION_CHECK_AMPLITUDE)));
     }
 
     @Test

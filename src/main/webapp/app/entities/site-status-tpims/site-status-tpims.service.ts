@@ -15,6 +15,7 @@ export class SiteStatusTpimsService {
 
     private resourceUrl =  SERVER_API_URL + 'api/site-statuses';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/site-statuses';
+    private updateUrl = SERVER_API_URL + 'api/operator-update';
 
     constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
@@ -26,7 +27,7 @@ export class SiteStatusTpimsService {
 
     update(siteStatus: SiteStatusTpims): Observable<EntityResponseType> {
         const copy = this.convert(siteStatus);
-        return this.http.put<SiteStatusTpims>(this.resourceUrl, copy, { observe: 'response' })
+        return this.http.put<SiteStatusTpims>(this.updateUrl, copy, { observe: 'response' })
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 

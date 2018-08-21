@@ -57,7 +57,9 @@
             <label class="form-control-label" for="field_location">Location</label>
             <select class="form-control" id="field_location" name="location" [(ngModel)]="site.locationId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption}}</option>
+                <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">
+                    {{locationOption.relevantHighway}} {{locationOption.directionOfTravel}} @ {{locationOption.referencePost}}
+                </option>
             </select>
         </div>
     </div>

@@ -15,6 +15,7 @@ export class SiteStatusTpims implements BaseEntity {
         public trustData?: boolean,
         public lastDeviceUpdate?: any,
         public lastOperatorUpdate?: any,
+        public verificationCheckAmplitude?: number,
         public siteId?: number,
     ) {
         this.open = false;

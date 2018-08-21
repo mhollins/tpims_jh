@@ -77,7 +77,7 @@
             <label class="form-control-label" for="field_county">County</label>
             <select class="form-control" id="field_county" name="county" [(ngModel)]="location.countyId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="countyOption.id" *ngFor="let countyOption of counties; trackBy: trackCountyById">{{countyOption.id}}</option>
+                <option [ngValue]="countyOption.id" *ngFor="let countyOption of counties; trackBy: trackCountyById">{{countyOption.countyName}}</option>
             </select>
         </div>
     </div>

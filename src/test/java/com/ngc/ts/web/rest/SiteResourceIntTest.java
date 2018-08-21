@@ -25,12 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static com.ngc.ts.web.rest.TestUtil.sameInstant;
 import static com.ngc.ts.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -59,8 +56,8 @@ public class SiteResourceIntTest {
     private static final Integer DEFAULT_LOW_THRESHOLD = 1;
     private static final Integer UPDATED_LOW_THRESHOLD = 2;
 
-    private static final ZonedDateTime DEFAULT_STATIC_DATA_UPDATED = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_STATIC_DATA_UPDATED = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Instant DEFAULT_STATIC_DATA_UPDATED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_STATIC_DATA_UPDATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final OwnerShipOptions DEFAULT_OWNERSHIP = OwnerShipOptions.PR;
     private static final OwnerShipOptions UPDATED_OWNERSHIP = OwnerShipOptions.PU;
@@ -149,8 +146,7 @@ public class SiteResourceIntTest {
 
         // Validate the Site in Elasticsearch
         Site siteEs = siteSearchRepository.findOne(testSite.getId());
-        assertThat(testSite.getStaticDataUpdated()).isEqualTo(testSite.getStaticDataUpdated());
-        assertThat(siteEs).isEqualToIgnoringGivenFields(testSite, "staticDataUpdated");
+        assertThat(siteEs).isEqualToIgnoringGivenFields(testSite);
     }
 
     @Test
@@ -207,7 +203,7 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.[*].siteName").value(hasItem(DEFAULT_SITE_NAME.toString())))
             .andExpect(jsonPath("$.[*].totalCapacity").value(hasItem(DEFAULT_TOTAL_CAPACITY)))
             .andExpect(jsonPath("$.[*].lowThreshold").value(hasItem(DEFAULT_LOW_THRESHOLD)))
-            .andExpect(jsonPath("$.[*].staticDataUpdated").value(hasItem(sameInstant(DEFAULT_STATIC_DATA_UPDATED))))
+            .andExpect(jsonPath("$.[*].staticDataUpdated").value(hasItem(DEFAULT_STATIC_DATA_UPDATED.toString())))
             .andExpect(jsonPath("$.[*].ownership").value(hasItem(DEFAULT_OWNERSHIP.toString())));
     }
 
@@ -226,7 +222,7 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.siteName").value(DEFAULT_SITE_NAME.toString()))
             .andExpect(jsonPath("$.totalCapacity").value(DEFAULT_TOTAL_CAPACITY))
             .andExpect(jsonPath("$.lowThreshold").value(DEFAULT_LOW_THRESHOLD))
-            .andExpect(jsonPath("$.staticDataUpdated").value(sameInstant(DEFAULT_STATIC_DATA_UPDATED)))
+            .andExpect(jsonPath("$.staticDataUpdated").value(DEFAULT_STATIC_DATA_UPDATED.toString()))
             .andExpect(jsonPath("$.ownership").value(DEFAULT_OWNERSHIP.toString()));
     }
 
@@ -277,8 +273,7 @@ public class SiteResourceIntTest {
 
         // Validate the Site in Elasticsearch
         Site siteEs = siteSearchRepository.findOne(testSite.getId());
-        assertThat(testSite.getStaticDataUpdated()).isEqualTo(testSite.getStaticDataUpdated());
-        assertThat(siteEs).isEqualToIgnoringGivenFields(testSite, "staticDataUpdated");
+        assertThat(siteEs).isEqualToIgnoringGivenFields(testSite);
     }
 
     @Test
@@ -338,7 +333,7 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.[*].siteName").value(hasItem(DEFAULT_SITE_NAME.toString())))
             .andExpect(jsonPath("$.[*].totalCapacity").value(hasItem(DEFAULT_TOTAL_CAPACITY)))
             .andExpect(jsonPath("$.[*].lowThreshold").value(hasItem(DEFAULT_LOW_THRESHOLD)))
-            .andExpect(jsonPath("$.[*].staticDataUpdated").value(hasItem(sameInstant(DEFAULT_STATIC_DATA_UPDATED))))
+            .andExpect(jsonPath("$.[*].staticDataUpdated").value(hasItem(DEFAULT_STATIC_DATA_UPDATED.toString())))
             .andExpect(jsonPath("$.[*].ownership").value(hasItem(DEFAULT_OWNERSHIP.toString())));
     }
 

@@ -17,6 +17,8 @@ public interface SiteStatusService {
      */
     SiteStatusDTO save(SiteStatusDTO siteStatusDTO);
 
+    SiteStatusDTO update(SiteStatusDTO siteStatusDTO);
+
     /**
      * Get all the siteStatuses.
      *

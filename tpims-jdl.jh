@@ -53,6 +53,7 @@ entity Logos {
 /** Dynamic Site Status **/
 entity SiteStatus {
 	reportedAvailable Integer,
+    vehiclesCounted Integer,
     trend TrendOptions,
     /** wheather parking site is open or closed **/
     open Boolean,
@@ -60,9 +61,9 @@ entity SiteStatus {
      *  Possible reasons for false include construction,
      *  maintenance, equipment failures */
     trustData Boolean,
-    lastDeviceUpdate ZonedDateTime,
-    lastOperatorUpdate ZonedDateTime,
-    
+    lastDeviceUpdate Instant,
+    lastOperatorUpdate Instant,
+    verificationCheckAmplitude Integer
 }
 
 enum TrendOptions {
@@ -121,12 +122,10 @@ relationship OneToOne {
 	SiteStatus{site} to Site{status}
 }
 /** uni-directional **/
-relationship ManyToOne {
+relationship OneToOne {
 	District{state} to State,
 	County{district} to District,
-	Location{county} to County
-}
-relationship OneToOne {
+	Location{county} to County,
 	Site{location} to Location
 }
 

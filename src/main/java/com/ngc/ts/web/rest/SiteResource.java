@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,6 +70,7 @@ public class SiteResource {
             throw new BadRequestAlertException("A new site cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Site site = siteMapper.toEntity(siteDTO);
+        site.setStaticDataUpdated(Instant.now());
         site = siteRepository.save(site);
         SiteDTO result = siteMapper.toDto(site);
         siteSearchRepository.save(site);
@@ -94,6 +96,7 @@ public class SiteResource {
             return createSite(siteDTO);
         }
         Site site = siteMapper.toEntity(siteDTO);
+        site.setStaticDataUpdated(Instant.now());
         site = siteRepository.save(site);
         SiteDTO result = siteMapper.toDto(site);
         siteSearchRepository.save(site);

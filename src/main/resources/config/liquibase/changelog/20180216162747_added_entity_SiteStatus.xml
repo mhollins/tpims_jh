@@ -44,6 +44,10 @@
             <column name="last_operator_update" type="timestamp">
                 <constraints nullable="true" />
             </column>
+
+            <column name="verification_check_amplitude" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="site_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>

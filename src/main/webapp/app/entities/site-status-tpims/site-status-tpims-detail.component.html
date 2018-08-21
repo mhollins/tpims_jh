@@ -30,6 +30,10 @@ maintenance, equipment failures">Trust Data</span></dt>
         <dd>
             <span>{{siteStatus.lastOperatorUpdate | date:'medium'}}</span>
         </dd>
+        <dt><span>Verification Check Amplitude</span></dt>
+        <dd>
+            <span>{{siteStatus.verificationCheckAmplitude}}</span>
+        </dd>
         <dt><span>Site</span></dt>
         <dd>
             <div *ngIf="siteStatus.siteId">

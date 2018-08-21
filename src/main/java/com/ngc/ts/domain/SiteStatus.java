@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 import com.ngc.ts.domain.enumeration.TrendOptions;
@@ -55,10 +55,13 @@ public class SiteStatus implements Serializable {
     private Boolean trustData;
 
     @Column(name = "last_device_update")
-    private ZonedDateTime lastDeviceUpdate;
+    private Instant lastDeviceUpdate;
 
     @Column(name = "last_operator_update")
-    private ZonedDateTime lastOperatorUpdate;
+    private Instant lastOperatorUpdate;
+
+    @Column(name = "verification_check_amplitude")
+    private Integer verificationCheckAmplitude;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -125,30 +128,43 @@ public class SiteStatus implements Serializable {
         this.trustData = trustData;
     }
 
-    public ZonedDateTime getLastDeviceUpdate() {
+    public Instant getLastDeviceUpdate() {
         return lastDeviceUpdate;
     }
 
-    public SiteStatus lastDeviceUpdate(ZonedDateTime lastDeviceUpdate) {
+    public SiteStatus lastDeviceUpdate(Instant lastDeviceUpdate) {
         this.lastDeviceUpdate = lastDeviceUpdate;
         return this;
     }
 
-    public void setLastDeviceUpdate(ZonedDateTime lastDeviceUpdate) {
+    public void setLastDeviceUpdate(Instant lastDeviceUpdate) {
         this.lastDeviceUpdate = lastDeviceUpdate;
     }
 
-    public ZonedDateTime getLastOperatorUpdate() {
+    public Instant getLastOperatorUpdate() {
         return lastOperatorUpdate;
     }
 
-    public SiteStatus lastOperatorUpdate(ZonedDateTime lastOperatorUpdate) {
+    public SiteStatus lastOperatorUpdate(Instant lastOperatorUpdate) {
         this.lastOperatorUpdate = lastOperatorUpdate;
         return this;
     }
 
-    public void setLastOperatorUpdate(ZonedDateTime lastOperatorUpdate) {
+    public void setLastOperatorUpdate(Instant lastOperatorUpdate) {
         this.lastOperatorUpdate = lastOperatorUpdate;
+    }
+
+    public Integer getVerificationCheckAmplitude() {
+        return verificationCheckAmplitude;
+    }
+
+    public SiteStatus verificationCheckAmplitude(Integer verificationCheckAmplitude) {
+        this.verificationCheckAmplitude = verificationCheckAmplitude;
+        return this;
+    }
+
+    public void setVerificationCheckAmplitude(Integer verificationCheckAmplitude) {
+        this.verificationCheckAmplitude = verificationCheckAmplitude;
     }
 
     public Site getSite() {
@@ -195,6 +211,7 @@ public class SiteStatus implements Serializable {
             ", trustData='" + isTrustData() + "'" +
             ", lastDeviceUpdate='" + getLastDeviceUpdate() + "'" +
             ", lastOperatorUpdate='" + getLastOperatorUpdate() + "'" +
+            ", verificationCheckAmplitude=" + getVerificationCheckAmplitude() +
             "}";
     }
 }

@@ -85,6 +85,28 @@ public class SiteStatusResource {
     }
 
     /**
+     * PUT  /operator-update : Updates an existing siteStatus.
+     *
+     * @param siteStatusDTO the siteStatusDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated siteStatusDTO,
+     * or with status 400 (Bad Request) if the siteStatusDTO is not valid,
+     * or with status 500 (Internal Server Error) if the siteStatusDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/operator-update")
+    @Timed
+    public ResponseEntity<SiteStatusDTO> operatorUpdateSiteStatus(@RequestBody SiteStatusDTO siteStatusDTO) throws URISyntaxException {
+        log.debug("REST request to update SiteStatus : {}", siteStatusDTO);
+        if (siteStatusDTO.getId() == null) {
+            return createSiteStatus(siteStatusDTO);
+        }
+        SiteStatusDTO result = siteStatusService.update(siteStatusDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, siteStatusDTO.getId().toString()))
+            .body(result);
+    }
+
+    /**
      * GET  /site-statuses : get all the siteStatuses.
      *
      * @param pageable the pagination information

@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -48,7 +48,7 @@ public class Site implements Serializable {
     private Integer lowThreshold;
 
     @Column(name = "static_data_updated")
-    private ZonedDateTime staticDataUpdated;
+    private Instant staticDataUpdated;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ownership")
@@ -143,16 +143,16 @@ public class Site implements Serializable {
         this.lowThreshold = lowThreshold;
     }
 
-    public ZonedDateTime getStaticDataUpdated() {
+    public Instant getStaticDataUpdated() {
         return staticDataUpdated;
     }
 
-    public Site staticDataUpdated(ZonedDateTime staticDataUpdated) {
+    public Site staticDataUpdated(Instant staticDataUpdated) {
         this.staticDataUpdated = staticDataUpdated;
         return this;
     }
 
-    public void setStaticDataUpdated(ZonedDateTime staticDataUpdated) {
+    public void setStaticDataUpdated(Instant staticDataUpdated) {
         this.staticDataUpdated = staticDataUpdated;
     }
 

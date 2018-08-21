@@ -32,12 +32,16 @@
         },
         {
             "fieldName": "lastDeviceUpdate",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "Instant"
         },
         {
             "fieldName": "lastOperatorUpdate",
-            "fieldType": "ZonedDateTime"
-        }
+            "fieldType": "Instant"
+        },
+	{
+	    "fieldName": "verificationCheckAmplitude",
+	    "fieldType": "Integer"
+	}
     ],
     "changelogDate": "20180216162747",
     "javadoc": "Dynamic Site Status",

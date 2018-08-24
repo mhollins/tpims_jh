@@ -16,13 +16,18 @@
             <label class="form-control-label" for="field_site">Site</label>
             <select class="form-control" id="field_site" name="site" [(ngModel)]="siteStatus.siteId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.siteId}}</option>
+                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_reportedAvailable">Reported Available</label>
             <input type="number" class="form-control" name="reportedAvailable" id="field_reportedAvailable"
                 [(ngModel)]="siteStatus.reportedAvailable" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_vehiclesCounted">Vehicles Counted</label>
+            <input type="number" class="form-control" name="vehiclesCounted" id="field_vehiclesCounted"
+                [(ngModel)]="siteStatus.vehiclesCounted" />
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_trend">Trend</label>
@@ -57,6 +62,11 @@ maintenance, equipment failures">Trust Data</label>
                 <!--<input id="field_lastOperatorUpdate" type="datetime-local" class="form-control" name="lastOperatorUpdate" [(ngModel)]="siteStatus.lastOperatorUpdate"-->
                 <!--/>-->
             <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_verificationCheckAmplitude">Verification Check Amplitude</label>-->
+            <!--<input type="number" class="form-control" name="verificationCheckAmplitude" id="field_verificationCheckAmplitude"-->
+                <!--[(ngModel)]="siteStatus.verificationCheckAmplitude" />-->
         <!--</div>-->
 
     </div>

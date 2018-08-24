@@ -13,12 +13,12 @@
                    <!--[(ngModel)]="site.id" readonly />-->
         <!--</div>-->
         <div class="form-group">
-            <label class="form-control-label" for="field_siteId">Site ID</label>
-            <input type="text" class="form-control" name="siteId" id="field_siteId"
-                [(ngModel)]="site.siteId" required/>
-            <div [hidden]="!(editForm.controls.siteId?.dirty && editForm.controls.siteId?.invalid)">
+            <label class="form-control-label" for="field_maastoSiteId">MAASTO Site ID</label>
+            <input type="text" class="form-control" name="maastoSiteId" id="field_maastoSiteId"
+                [(ngModel)]="site.maastoSiteId" required/>
+            <div [hidden]="!(editForm.controls.maastoSiteId?.dirty && editForm.controls.maastoSiteId?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.siteId?.errors?.required">
+                   [hidden]="!editForm.controls.maastoSiteId?.errors?.required">
                    This field is required.
                 </small>
             </div>

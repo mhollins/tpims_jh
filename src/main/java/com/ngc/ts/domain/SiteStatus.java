@@ -34,6 +34,9 @@ public class SiteStatus implements Serializable {
     @Column(name = "reported_available")
     private Integer reportedAvailable;
 
+    @Column(name = "vehicles_counted")
+    private Integer vehiclesCounted;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "trend")
     private TrendOptions trend;
@@ -87,6 +90,19 @@ public class SiteStatus implements Serializable {
 
     public void setReportedAvailable(Integer reportedAvailable) {
         this.reportedAvailable = reportedAvailable;
+    }
+
+    public Integer getVehiclesCounted() {
+        return vehiclesCounted;
+    }
+
+    public SiteStatus vehiclesCounted(Integer vehiclesCounted) {
+        this.vehiclesCounted = vehiclesCounted;
+        return this;
+    }
+
+    public void setVehiclesCounted(Integer vehiclesCounted) {
+        this.vehiclesCounted = vehiclesCounted;
     }
 
     public TrendOptions getTrend() {
@@ -206,6 +222,7 @@ public class SiteStatus implements Serializable {
         return "SiteStatus{" +
             "id=" + getId() +
             ", reportedAvailable=" + getReportedAvailable() +
+            ", vehiclesCounted=" + getVehiclesCounted() +
             ", trend='" + getTrend() + "'" +
             ", open='" + isOpen() + "'" +
             ", trustData='" + isTrustData() + "'" +

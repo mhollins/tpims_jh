@@ -32,11 +32,13 @@
             <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="siteId"><span>Site</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reportedAvailable"><span>Reported Available</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vehiclesCounted"><span>Vehicles Counted</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trend"><span>Trend</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="open"><span>Open</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trustData"><span>Trust Data</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastDeviceUpdate"><span>Last Device Update</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastOperatorUpdate"><span>Last Operator Update</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="verificationCheckAmplitude"><span>Verification Check Amplitude</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -49,11 +51,13 @@
                     </div>
                 </td>
                 <td>{{siteStatus.reportedAvailable}}</td>
+                <td>{{siteStatus.vehiclesCounted}}</td>
                 <td>{{siteStatus.trend}}</td>
                 <td>{{siteStatus.open}}</td>
                 <td>{{siteStatus.trustData}}</td>
                 <td>{{siteStatus.lastDeviceUpdate | date:'medium'}}</td>
                 <td>{{siteStatus.lastOperatorUpdate | date:'medium'}}</td>
+                <td>{{siteStatus.verificationCheckAmplitude}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -17,7 +17,7 @@ public class SiteDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String siteId;
+    private String maastoSiteId;
 
     private String siteName;
 
@@ -39,12 +39,12 @@ public class SiteDTO implements Serializable {
         this.id = id;
     }
 
-    public String getSiteId() {
-        return siteId;
+    public String getMaastoSiteId() {
+        return maastoSiteId;
     }
 
-    public void setSiteId(String siteId) {
-        this.siteId = siteId;
+    public void setMaastoSiteId(String maastoSiteId) {
+        this.maastoSiteId = maastoSiteId;
     }
 
     public String getSiteName() {
@@ -120,7 +120,7 @@ public class SiteDTO implements Serializable {
     public String toString() {
         return "SiteDTO{" +
             "id=" + getId() +
-            ", siteId='" + getSiteId() + "'" +
+            ", maastoSiteId='" + getMaastoSiteId() + "'" +
             ", siteName='" + getSiteName() + "'" +
             ", totalCapacity=" + getTotalCapacity() +
             ", lowThreshold=" + getLowThreshold() +

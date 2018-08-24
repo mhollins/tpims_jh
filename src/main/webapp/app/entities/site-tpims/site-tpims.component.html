@@ -30,7 +30,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
-            <th jhiSortBy="siteId"><span>Site Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="siteId"><span>MAASTO Site Id</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="siteName"><span>Site Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="totalCapacity"><span>Total Capacity</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lowThreshold"><span>Low Threshold</span> <span class="fa fa-sort"></span></th>
@@ -43,7 +43,7 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let site of sites ;trackBy: trackId">
                 <!--<td><a [routerLink]="['../site-tpims', site.id ]">{{site.id}}</a></td>-->
-                <td><a [routerLink]="['/', { outlets: { popup: 'site-tpims/'+ site.id + '/edit'} }]">{{site.siteId}}</a></td>
+                <td><a [routerLink]="['/', { outlets: { popup: 'site-tpims/'+ site.id + '/edit'} }]">{{site.maastoSiteId}}</a></td>
                 <td>{{site.siteName}}</td>
                 <td>{{site.totalCapacity}}</td>
                 <td>{{site.lowThreshold}}</td>

@@ -8,7 +8,7 @@ export const enum OwnerShipOptions {
 export class SiteTpims implements BaseEntity {
     constructor(
         public id?: number,
-        public siteId?: string,
+        public maastoSiteId?: string,
         public siteName?: string,
         public totalCapacity?: number,
         public lowThreshold?: number,

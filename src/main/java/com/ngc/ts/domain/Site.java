@@ -35,8 +35,8 @@ public class Site implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "site_id", nullable = false)
-    private String siteId;
+    @Column(name = "maasto_site_id", nullable = false)
+    private String maastoSiteId;
 
     @Column(name = "site_name")
     private String siteName;
@@ -91,17 +91,17 @@ public class Site implements Serializable {
         this.id = id;
     }
 
-    public String getSiteId() {
-        return siteId;
+    public String getMaastoSiteId() {
+        return maastoSiteId;
     }
 
-    public Site siteId(String siteId) {
-        this.siteId = siteId;
+    public Site maastoSiteId(String maastoSiteId) {
+        this.maastoSiteId = maastoSiteId;
         return this;
     }
 
-    public void setSiteId(String siteId) {
-        this.siteId = siteId;
+    public void setMaastoSiteId(String maastoSiteId) {
+        this.maastoSiteId = maastoSiteId;
     }
 
     public String getSiteName() {
@@ -320,7 +320,7 @@ public class Site implements Serializable {
     public String toString() {
         return "Site{" +
             "id=" + getId() +
-            ", siteId='" + getSiteId() + "'" +
+            ", maastoSiteId='" + getMaastoSiteId() + "'" +
             ", siteName='" + getSiteName() + "'" +
             ", totalCapacity=" + getTotalCapacity() +
             ", lowThreshold=" + getLowThreshold() +

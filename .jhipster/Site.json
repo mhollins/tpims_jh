@@ -43,7 +43,7 @@
     ],
     "fields": [
         {
-            "fieldName": "siteId",
+            "fieldName": "maastoSiteId",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

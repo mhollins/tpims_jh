@@ -17,6 +17,8 @@ public class SiteStatusDTO implements Serializable {
 
     private Integer reportedAvailable;
 
+    private Integer vehiclesCounted;
+
     private TrendOptions trend;
 
     private Boolean open;
@@ -45,6 +47,14 @@ public class SiteStatusDTO implements Serializable {
 
     public void setReportedAvailable(Integer reportedAvailable) {
         this.reportedAvailable = reportedAvailable;
+    }
+
+    public Integer getVehiclesCounted() {
+        return vehiclesCounted;
+    }
+
+    public void setVehiclesCounted(Integer vehiclesCounted) {
+        this.vehiclesCounted = vehiclesCounted;
     }
 
     public TrendOptions getTrend() {
@@ -129,6 +139,7 @@ public class SiteStatusDTO implements Serializable {
         return "SiteStatusDTO{" +
             "id=" + getId() +
             ", reportedAvailable=" + getReportedAvailable() +
+            ", vehiclesCounted=" + getVehiclesCounted() +
             ", trend='" + getTrend() + "'" +
             ", open='" + isOpen() + "'" +
             ", trustData='" + isTrustData() + "'" +

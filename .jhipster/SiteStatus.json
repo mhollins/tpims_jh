@@ -16,6 +16,10 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "vehiclesCounted",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "trend",
             "fieldType": "TrendOptions",
             "fieldValues": "EMPTYING,STEADY,FILLING"
@@ -38,10 +42,10 @@
             "fieldName": "lastOperatorUpdate",
             "fieldType": "Instant"
         },
-	{
-	    "fieldName": "verificationCheckAmplitude",
-	    "fieldType": "Integer"
-	}
+        {
+            "fieldName": "verificationCheckAmplitude",
+            "fieldType": "Integer"
+        }
     ],
     "changelogDate": "20180216162747",
     "javadoc": "Dynamic Site Status",

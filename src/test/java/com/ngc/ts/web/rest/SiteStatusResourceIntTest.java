@@ -48,6 +48,9 @@ public class SiteStatusResourceIntTest {
     private static final Integer DEFAULT_REPORTED_AVAILABLE = 1;
     private static final Integer UPDATED_REPORTED_AVAILABLE = 2;
 
+    private static final Integer DEFAULT_VEHICLES_COUNTED = 1;
+    private static final Integer UPDATED_VEHICLES_COUNTED = 2;
+
     private static final TrendOptions DEFAULT_TREND = TrendOptions.EMPTYING;
     private static final TrendOptions UPDATED_TREND = TrendOptions.STEADY;
 
@@ -114,6 +117,7 @@ public class SiteStatusResourceIntTest {
     public static SiteStatus createEntity(EntityManager em) {
         SiteStatus siteStatus = new SiteStatus()
             .reportedAvailable(DEFAULT_REPORTED_AVAILABLE)
+            .vehiclesCounted(DEFAULT_VEHICLES_COUNTED)
             .trend(DEFAULT_TREND)
             .open(DEFAULT_OPEN)
             .trustData(DEFAULT_TRUST_DATA)
@@ -146,6 +150,7 @@ public class SiteStatusResourceIntTest {
         assertThat(siteStatusList).hasSize(databaseSizeBeforeCreate + 1);
         SiteStatus testSiteStatus = siteStatusList.get(siteStatusList.size() - 1);
         assertThat(testSiteStatus.getReportedAvailable()).isEqualTo(DEFAULT_REPORTED_AVAILABLE);
+        assertThat(testSiteStatus.getVehiclesCounted()).isEqualTo(DEFAULT_VEHICLES_COUNTED);
         assertThat(testSiteStatus.getTrend()).isEqualTo(DEFAULT_TREND);
         assertThat(testSiteStatus.isOpen()).isEqualTo(DEFAULT_OPEN);
         assertThat(testSiteStatus.isTrustData()).isEqualTo(DEFAULT_TRUST_DATA);
@@ -190,6 +195,7 @@ public class SiteStatusResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(siteStatus.getId().intValue())))
             .andExpect(jsonPath("$.[*].reportedAvailable").value(hasItem(DEFAULT_REPORTED_AVAILABLE)))
+            .andExpect(jsonPath("$.[*].vehiclesCounted").value(hasItem(DEFAULT_VEHICLES_COUNTED)))
             .andExpect(jsonPath("$.[*].trend").value(hasItem(DEFAULT_TREND.toString())))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].trustData").value(hasItem(DEFAULT_TRUST_DATA.booleanValue())))
@@ -210,6 +216,7 @@ public class SiteStatusResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(siteStatus.getId().intValue()))
             .andExpect(jsonPath("$.reportedAvailable").value(DEFAULT_REPORTED_AVAILABLE))
+            .andExpect(jsonPath("$.vehiclesCounted").value(DEFAULT_VEHICLES_COUNTED))
             .andExpect(jsonPath("$.trend").value(DEFAULT_TREND.toString()))
             .andExpect(jsonPath("$.open").value(DEFAULT_OPEN.booleanValue()))
             .andExpect(jsonPath("$.trustData").value(DEFAULT_TRUST_DATA.booleanValue()))
@@ -240,6 +247,7 @@ public class SiteStatusResourceIntTest {
         em.detach(updatedSiteStatus);
         updatedSiteStatus
             .reportedAvailable(UPDATED_REPORTED_AVAILABLE)
+            .vehiclesCounted(UPDATED_VEHICLES_COUNTED)
             .trend(UPDATED_TREND)
             .open(UPDATED_OPEN)
             .trustData(UPDATED_TRUST_DATA)
@@ -258,6 +266,7 @@ public class SiteStatusResourceIntTest {
         assertThat(siteStatusList).hasSize(databaseSizeBeforeUpdate);
         SiteStatus testSiteStatus = siteStatusList.get(siteStatusList.size() - 1);
         assertThat(testSiteStatus.getReportedAvailable()).isEqualTo(UPDATED_REPORTED_AVAILABLE);
+        assertThat(testSiteStatus.getVehiclesCounted()).isEqualTo(UPDATED_VEHICLES_COUNTED);
         assertThat(testSiteStatus.getTrend()).isEqualTo(UPDATED_TREND);
         assertThat(testSiteStatus.isOpen()).isEqualTo(UPDATED_OPEN);
         assertThat(testSiteStatus.isTrustData()).isEqualTo(UPDATED_TRUST_DATA);
@@ -324,6 +333,7 @@ public class SiteStatusResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(siteStatus.getId().intValue())))
             .andExpect(jsonPath("$.[*].reportedAvailable").value(hasItem(DEFAULT_REPORTED_AVAILABLE)))
+            .andExpect(jsonPath("$.[*].vehiclesCounted").value(hasItem(DEFAULT_VEHICLES_COUNTED)))
             .andExpect(jsonPath("$.[*].trend").value(hasItem(DEFAULT_TREND.toString())))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].trustData").value(hasItem(DEFAULT_TRUST_DATA.booleanValue())))

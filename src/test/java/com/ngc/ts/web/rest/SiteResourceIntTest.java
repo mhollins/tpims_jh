@@ -44,8 +44,8 @@ import com.ngc.ts.domain.enumeration.OwnerShipOptions;
 @SpringBootTest(classes = TpimsApp.class)
 public class SiteResourceIntTest {
 
-    private static final String DEFAULT_SITE_ID = "AAAAAAAAAA";
-    private static final String UPDATED_SITE_ID = "BBBBBBBBBB";
+    private static final String DEFAULT_MAASTO_SITE_ID = "AAAAAAAAAA";
+    private static final String UPDATED_MAASTO_SITE_ID = "BBBBBBBBBB";
 
     private static final String DEFAULT_SITE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_SITE_NAME = "BBBBBBBBBB";
@@ -106,7 +106,7 @@ public class SiteResourceIntTest {
      */
     public static Site createEntity(EntityManager em) {
         Site site = new Site()
-            .siteId(DEFAULT_SITE_ID)
+            .maastoSiteId(DEFAULT_MAASTO_SITE_ID)
             .siteName(DEFAULT_SITE_NAME)
             .totalCapacity(DEFAULT_TOTAL_CAPACITY)
             .lowThreshold(DEFAULT_LOW_THRESHOLD)
@@ -137,7 +137,7 @@ public class SiteResourceIntTest {
         List<Site> siteList = siteRepository.findAll();
         assertThat(siteList).hasSize(databaseSizeBeforeCreate + 1);
         Site testSite = siteList.get(siteList.size() - 1);
-        assertThat(testSite.getSiteId()).isEqualTo(DEFAULT_SITE_ID);
+        assertThat(testSite.getMaastoSiteId()).isEqualTo(DEFAULT_MAASTO_SITE_ID);
         assertThat(testSite.getSiteName()).isEqualTo(DEFAULT_SITE_NAME);
         assertThat(testSite.getTotalCapacity()).isEqualTo(DEFAULT_TOTAL_CAPACITY);
         assertThat(testSite.getLowThreshold()).isEqualTo(DEFAULT_LOW_THRESHOLD);
@@ -171,10 +171,10 @@ public class SiteResourceIntTest {
 
     @Test
     @Transactional
-    public void checkSiteIdIsRequired() throws Exception {
+    public void checkMaastoSiteIdIsRequired() throws Exception {
         int databaseSizeBeforeTest = siteRepository.findAll().size();
         // set the field null
-        site.setSiteId(null);
+        site.setMaastoSiteId(null);
 
         // Create the Site, which fails.
         SiteDTO siteDTO = siteMapper.toDto(site);
@@ -199,7 +199,7 @@ public class SiteResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(site.getId().intValue())))
-            .andExpect(jsonPath("$.[*].siteId").value(hasItem(DEFAULT_SITE_ID.toString())))
+            .andExpect(jsonPath("$.[*].maastoSiteId").value(hasItem(DEFAULT_MAASTO_SITE_ID.toString())))
             .andExpect(jsonPath("$.[*].siteName").value(hasItem(DEFAULT_SITE_NAME.toString())))
             .andExpect(jsonPath("$.[*].totalCapacity").value(hasItem(DEFAULT_TOTAL_CAPACITY)))
             .andExpect(jsonPath("$.[*].lowThreshold").value(hasItem(DEFAULT_LOW_THRESHOLD)))
@@ -218,7 +218,7 @@ public class SiteResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(site.getId().intValue()))
-            .andExpect(jsonPath("$.siteId").value(DEFAULT_SITE_ID.toString()))
+            .andExpect(jsonPath("$.maastoSiteId").value(DEFAULT_MAASTO_SITE_ID.toString()))
             .andExpect(jsonPath("$.siteName").value(DEFAULT_SITE_NAME.toString()))
             .andExpect(jsonPath("$.totalCapacity").value(DEFAULT_TOTAL_CAPACITY))
             .andExpect(jsonPath("$.lowThreshold").value(DEFAULT_LOW_THRESHOLD))
@@ -247,7 +247,7 @@ public class SiteResourceIntTest {
         // Disconnect from session so that the updates on updatedSite are not directly saved in db
         em.detach(updatedSite);
         updatedSite
-            .siteId(UPDATED_SITE_ID)
+            .maastoSiteId(UPDATED_MAASTO_SITE_ID)
             .siteName(UPDATED_SITE_NAME)
             .totalCapacity(UPDATED_TOTAL_CAPACITY)
             .lowThreshold(UPDATED_LOW_THRESHOLD)
@@ -264,7 +264,7 @@ public class SiteResourceIntTest {
         List<Site> siteList = siteRepository.findAll();
         assertThat(siteList).hasSize(databaseSizeBeforeUpdate);
         Site testSite = siteList.get(siteList.size() - 1);
-        assertThat(testSite.getSiteId()).isEqualTo(UPDATED_SITE_ID);
+        assertThat(testSite.getMaastoSiteId()).isEqualTo(UPDATED_MAASTO_SITE_ID);
         assertThat(testSite.getSiteName()).isEqualTo(UPDATED_SITE_NAME);
         assertThat(testSite.getTotalCapacity()).isEqualTo(UPDATED_TOTAL_CAPACITY);
         assertThat(testSite.getLowThreshold()).isEqualTo(UPDATED_LOW_THRESHOLD);
@@ -329,7 +329,7 @@ public class SiteResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(site.getId().intValue())))
-            .andExpect(jsonPath("$.[*].siteId").value(hasItem(DEFAULT_SITE_ID.toString())))
+            .andExpect(jsonPath("$.[*].maastoSiteId").value(hasItem(DEFAULT_MAASTO_SITE_ID.toString())))
             .andExpect(jsonPath("$.[*].siteName").value(hasItem(DEFAULT_SITE_NAME.toString())))
             .andExpect(jsonPath("$.[*].totalCapacity").value(hasItem(DEFAULT_TOTAL_CAPACITY)))
             .andExpect(jsonPath("$.[*].lowThreshold").value(hasItem(DEFAULT_LOW_THRESHOLD)))

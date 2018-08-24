@@ -10,6 +10,7 @@ export class SiteStatusTpims implements BaseEntity {
     constructor(
         public id?: number,
         public reportedAvailable?: number,
+        public vehiclesCounted?: number,
         public trend?: TrendOptions,
         public open?: boolean,
         public trustData?: boolean,

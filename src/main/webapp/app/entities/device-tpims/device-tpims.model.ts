@@ -17,6 +17,7 @@ export class DeviceTpims implements BaseEntity {
         public timeout?: number,
         public locationfunction?: LocationFunctions,
         public siteId?: number,
+        public siteName?: string,
     ) {
     }
 }

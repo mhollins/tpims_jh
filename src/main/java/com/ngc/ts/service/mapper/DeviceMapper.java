@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface DeviceMapper extends EntityMapper<DeviceDTO, Device> {
 
     @Mapping(source = "site.id", target = "siteId")
+    @Mapping(source = "site.siteName", target = "siteName")
     DeviceDTO toDto(Device device);
 
     @Mapping(source = "siteId", target = "site")

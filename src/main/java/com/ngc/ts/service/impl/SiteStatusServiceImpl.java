@@ -1,5 +1,7 @@
 package com.ngc.ts.service.impl;
 
+import com.ngc.ts.domain.Site;
+import com.ngc.ts.repository.SiteRepository;
 import com.ngc.ts.service.SiteStatusService;
 import com.ngc.ts.domain.SiteStatus;
 import com.ngc.ts.repository.SiteStatusRepository;
@@ -15,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.Instant;
-import java.time.ZoneId;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -30,12 +31,15 @@ public class SiteStatusServiceImpl implements SiteStatusService {
 
     private final SiteStatusRepository siteStatusRepository;
 
+    private final SiteRepository siteRepository;
+
     private final SiteStatusMapper siteStatusMapper;
 
     private final SiteStatusSearchRepository siteStatusSearchRepository;
 
-    public SiteStatusServiceImpl(SiteStatusRepository siteStatusRepository, SiteStatusMapper siteStatusMapper, SiteStatusSearchRepository siteStatusSearchRepository) {
+    public SiteStatusServiceImpl(SiteStatusRepository siteStatusRepository, SiteRepository siteRepository, SiteStatusMapper siteStatusMapper, SiteStatusSearchRepository siteStatusSearchRepository) {
         this.siteStatusRepository = siteStatusRepository;
+        this.siteRepository = siteRepository;
         this.siteStatusMapper = siteStatusMapper;
         this.siteStatusSearchRepository = siteStatusSearchRepository;
     }
@@ -50,6 +54,19 @@ public class SiteStatusServiceImpl implements SiteStatusService {
     public SiteStatusDTO save(SiteStatusDTO siteStatusDTO) {
         log.debug("Request to save SiteStatus : {}", siteStatusDTO);
         SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
+
+        Site theSite = siteRepository.findOne(siteStatusDTO.getSiteId());
+
+        if (siteStatus.getReportedAvailable() < 0) {
+            siteStatus.setReportedAvailable(0);
+        }
+        if (siteStatus.getReportedAvailable() > theSite.getTotalCapacity()) {
+            siteStatus.setReportedAvailable(theSite.getTotalCapacity());
+        }
+        if (siteStatus.getVehiclesCounted() < 0) {
+            siteStatus.setVehiclesCounted(0);
+        }
+
         siteStatus = siteStatusRepository.save(siteStatus);
         SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
         siteStatusSearchRepository.save(siteStatus);
@@ -65,22 +82,26 @@ public class SiteStatusServiceImpl implements SiteStatusService {
     @Override
     public SiteStatusDTO update(SiteStatusDTO siteStatusDTO) {
         log.debug("Request to update SiteStatus : {}", siteStatusDTO);
-        SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
+        //SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
 
         // set operator update time
-        siteStatus.setLastOperatorUpdate(Instant.now());
+        siteStatusDTO.setLastOperatorUpdate(Instant.now());
+        //siteStatus.setLastOperatorUpdate(Instant.now());
 
-        // calculate verification amplitude
-        SiteStatus previous = siteStatusRepository.findOne(siteStatus.getId());
+        //** calculate verification amplitude
+        // if the operator provided availability is greater than the total capacity, what do we do?
+        // I don't want to add another database query to get capacity, should add capacity to status?
+
+        SiteStatus previous = siteStatusRepository.findOne(siteStatusDTO.getId());
         if (previous != null) {
-            siteStatus.setVerificationCheckAmplitude(siteStatus.getReportedAvailable() - previous.getReportedAvailable());
+            siteStatusDTO.setVerificationCheckAmplitude(siteStatusDTO.getReportedAvailable() - previous.getReportedAvailable());
         }
 
-        siteStatus = siteStatusRepository.save(siteStatus);
-        siteStatusSearchRepository.save(siteStatus);
-
-        SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
-        return result;
+//        siteStatus = siteStatusRepository.save(siteStatus);
+//        siteStatusSearchRepository.save(siteStatus);
+//
+//        SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
+        return this.save(siteStatusDTO);
     }
 
     /**

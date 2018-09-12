@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -114,6 +115,19 @@ public class ImagesResource {
         Page<Images> page = imagesRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/images");
         return new ResponseEntity<>(imagesMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /images/bySite/{id]} : get all the images.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of images in body
+     */
+    @GetMapping("/images/bySite/{id}")
+    @Timed
+    public ResponseEntity<List<ImagesDTO>> getImagesBySite(@PathVariable Long id) {
+        log.debug("REST request to get Images by SiteId");
+        List<Images> images = imagesRepository.findBySiteId(id);
+        return new ResponseEntity<>(imagesMapper.toDto(images), HttpStatus.OK);
     }
 
     /**

@@ -22,7 +22,7 @@
             <label class="form-control-label" for="field_site">Site</label>
             <select class="form-control" id="field_site" name="site" [(ngModel)]="images.siteId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.id}}</option>
+                <option [ngValue]="siteOption.id" *ngFor="let siteOption of sites; trackBy: trackSiteById">{{siteOption.siteName}}</option>
             </select>
         </div>
     </div>

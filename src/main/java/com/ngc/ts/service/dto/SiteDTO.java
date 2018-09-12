@@ -5,6 +5,7 @@ import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 import com.ngc.ts.domain.enumeration.OwnerShipOptions;
@@ -30,6 +31,8 @@ public class SiteDTO implements Serializable {
     private OwnerShipOptions ownership;
 
     private Long locationId;
+
+    private List<String> imagesUrls;
 
     public Long getId() {
         return id;
@@ -93,6 +96,14 @@ public class SiteDTO implements Serializable {
 
     public void setLocationId(Long locationId) {
         this.locationId = locationId;
+    }
+
+    public List<String> getImagesUrls() {
+        return imagesUrls;
+    }
+
+    public void setImagesUrls(List<String> imagesUrls) {
+        this.imagesUrls = imagesUrls;
     }
 
     @Override

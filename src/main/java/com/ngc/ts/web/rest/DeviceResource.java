@@ -147,9 +147,9 @@ public class DeviceResource {
     }
 
     /**
-     * GET  /devices/byDeviceName/:name : get the "name" device.
+     * GET  /devices/bySiteId/:name : get the "name" device.
      *
-     * @param name the deviceName of the deviceDTO to retrieve
+     * @param id the siteId of the deviceDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the deviceDTO, or with status 404 (Not Found)
      */
     @GetMapping("/devices/bySiteId/{id}")

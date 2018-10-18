@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mhollins (generated)" id="1539810454609-1">
+        <addColumn tableName="device">
+            <column name="location_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mhollins (generated)" id="1539810454609-2">
+        <addForeignKeyConstraint baseColumnNames="site_id" baseTableName="site_status" constraintName="FKgkwowl5unx0dxm0amd9spvnor" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="site"/>
+    </changeSet>
+    <changeSet author="mhollins (generated)" id="1539810454609-3">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="device" constraintName="FKpi1ebkqu0bc3f3yh500kyf1m8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="location"/>
+    </changeSet>
+</databaseChangeLog>

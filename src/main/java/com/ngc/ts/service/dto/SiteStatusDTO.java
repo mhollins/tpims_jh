@@ -33,6 +33,12 @@ public class SiteStatusDTO implements Serializable {
 
     private Long siteId;
 
+    private Integer siteTotalCapacity;
+
+    private String siteName;
+
+    private String siteMaastoId;
+
     public Long getId() {
         return id;
     }
@@ -111,6 +117,30 @@ public class SiteStatusDTO implements Serializable {
 
     public void setSiteId(Long siteId) {
         this.siteId = siteId;
+    }
+
+    public Integer getSiteTotalCapacity() {
+        return siteTotalCapacity;
+    }
+
+    public void setSiteTotalCapacity(Integer siteTotalCapacity) {
+        this.siteTotalCapacity = siteTotalCapacity;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
+    }
+
+    public String getSiteMaastoId() {
+        return siteMaastoId;
+    }
+
+    public void setSiteMaastoId(String siteMaastoId) {
+        this.siteMaastoId = siteMaastoId;
     }
 
     @Override

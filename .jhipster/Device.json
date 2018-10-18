@@ -40,7 +40,7 @@
         {
             "fieldName": "locationfunction",
             "fieldType": "LocationFunctions",
-            "fieldValues": "ENTRANCE,EXIT"
+            "fieldValues": "ENTRANCE,EXIT,SIGN,CAMERA"
         }
     ],
     "changelogDate": "20180216162749",

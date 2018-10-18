@@ -96,7 +96,7 @@ public class SiteStatusResource {
     @PutMapping("/operator-update")
     @Timed
     public ResponseEntity<SiteStatusDTO> operatorUpdateSiteStatus(@RequestBody SiteStatusDTO siteStatusDTO) throws URISyntaxException {
-        log.debug("REST request to update SiteStatus : {}", siteStatusDTO);
+        log.debug("REST Operator request to update SiteStatus : {}", siteStatusDTO);
         if (siteStatusDTO.getId() == null) {
             return createSiteStatus(siteStatusDTO);
         }

@@ -12,6 +12,9 @@ import org.mapstruct.*;
 public interface SiteStatusMapper extends EntityMapper<SiteStatusDTO, SiteStatus> {
 
     @Mapping(source = "site.id", target = "siteId")
+    @Mapping(source = "site.totalCapacity", target = "siteTotalCapacity")
+    @Mapping(source = "site.siteName", target = "siteName")
+    @Mapping(source = "site.maastoSiteId", target = "siteMaastoId")
     SiteStatusDTO toDto(SiteStatus siteStatus);
 
     @Mapping(source = "siteId", target = "site")

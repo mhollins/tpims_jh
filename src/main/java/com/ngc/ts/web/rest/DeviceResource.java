@@ -3,6 +3,7 @@ package com.ngc.ts.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.ngc.ts.domain.Device;
 
+import com.ngc.ts.domain.enumeration.LocationFunctions;
 import com.ngc.ts.repository.DeviceRepository;
 import com.ngc.ts.repository.search.DeviceSearchRepository;
 import com.ngc.ts.web.rest.errors.BadRequestAlertException;
@@ -157,6 +158,21 @@ public class DeviceResource {
     public ResponseEntity<List<DeviceDTO>> getDevicesBySiteId(@PathVariable Long id) {
         log.debug("REST request to get Devices by site.id: {}", id);
         List<Device> devices = deviceRepository.findBySiteId(id);
+        List<DeviceDTO> deviceDTOs = deviceMapper.toDto(devices);
+        return new ResponseEntity<>(deviceDTOs, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /devices/byLocationFunction/:func : get the "function" device.
+     *
+     * @param func the locationfunction of the deviceDTOs to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the deviceDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/devices/byLocationFunction/{func}")
+    @Timed
+    public ResponseEntity<List<DeviceDTO>> getDevicesByLocationFunction(@PathVariable String func) {
+        log.debug("REST request to get Devices by locationfunction: {}", func);
+        List<Device> devices = deviceRepository.findByLocationfunction(LocationFunctions.valueOf(func));
         List<DeviceDTO> deviceDTOs = deviceMapper.toDto(devices);
         return new ResponseEntity<>(deviceDTOs, HttpStatus.OK);
     }

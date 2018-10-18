@@ -57,6 +57,9 @@ public class Device implements Serializable {
     @ManyToOne
     private Site site;
 
+    @ManyToOne
+    private Location location;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -182,6 +185,15 @@ public class Device implements Serializable {
     public void setSite(Site site) {
         this.site = site;
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

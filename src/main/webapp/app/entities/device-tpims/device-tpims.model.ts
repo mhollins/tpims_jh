@@ -2,7 +2,9 @@ import { BaseEntity } from './../../shared';
 
 export const enum LocationFunctions {
     'ENTRANCE',
-    'EXIT'
+    'EXIT',
+    'SIGN',
+    'CAMERA'
 }
 
 export class DeviceTpims implements BaseEntity {

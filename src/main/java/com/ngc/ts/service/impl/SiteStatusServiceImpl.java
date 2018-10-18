@@ -95,6 +95,9 @@ public class SiteStatusServiceImpl implements SiteStatusService {
         SiteStatus previous = siteStatusRepository.findOne(siteStatusDTO.getId());
         if (previous != null) {
             siteStatusDTO.setVerificationCheckAmplitude(siteStatusDTO.getReportedAvailable() - previous.getReportedAvailable());
+            log.debug("Verification amplitude: " + siteStatusDTO.getVerificationCheckAmplitude());
+        } else {
+            siteStatusDTO.setVerificationCheckAmplitude(siteStatusDTO.getReportedAvailable());
         }
 
 //        siteStatus = siteStatusRepository.save(siteStatus);

@@ -10,6 +10,7 @@ import { DeviceTpimsDialogComponent } from '../../../../../../main/webapp/app/en
 import { DeviceTpimsService } from '../../../../../../main/webapp/app/entities/device-tpims/device-tpims.service';
 import { DeviceTpims } from '../../../../../../main/webapp/app/entities/device-tpims/device-tpims.model';
 import { SiteTpimsService } from '../../../../../../main/webapp/app/entities/site-tpims';
+import { LocationTpimsService } from '../../../../../../main/webapp/app/entities/location-tpims';
 
 describe('Component Tests', () => {
 
@@ -26,6 +27,7 @@ describe('Component Tests', () => {
                 declarations: [DeviceTpimsDialogComponent],
                 providers: [
                     SiteTpimsService,
+                    LocationTpimsService,
                     DeviceTpimsService
                 ]
             })

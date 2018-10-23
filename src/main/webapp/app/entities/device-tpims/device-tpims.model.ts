@@ -20,6 +20,7 @@ export class DeviceTpims implements BaseEntity {
         public locationfunction?: LocationFunctions,
         public siteId?: number,
         public siteName?: string,
+        public locationId?: number,
     ) {
     }
 }

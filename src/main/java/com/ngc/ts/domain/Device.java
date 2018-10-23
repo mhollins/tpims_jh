@@ -190,10 +190,14 @@ public class Device implements Serializable {
         return location;
     }
 
+    public Device location(Location location) {
+        this.location = location;
+        return this;
+    }
+
     public void setLocation(Location location) {
         this.location = location;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

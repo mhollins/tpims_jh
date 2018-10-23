@@ -34,6 +34,8 @@ public class DeviceDTO implements Serializable {
 
     private String siteName;
 
+    private Long locationId;
+
     public Long getId() {
         return id;
     }
@@ -120,6 +122,14 @@ public class DeviceDTO implements Serializable {
 
     public void setSiteName(String siteName) {
         this.siteName = siteName;
+    }
+
+    public Long getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 
     @Override

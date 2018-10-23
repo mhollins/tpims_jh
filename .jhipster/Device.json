@@ -6,6 +6,12 @@
             "relationshipName": "site",
             "otherEntityName": "site",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

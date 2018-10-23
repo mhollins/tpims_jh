@@ -10,6 +10,7 @@ import { DeviceTpims } from './device-tpims.model';
 import { DeviceTpimsPopupService } from './device-tpims-popup.service';
 import { DeviceTpimsService } from './device-tpims.service';
 import { SiteTpims, SiteTpimsService } from '../site-tpims';
+import { LocationTpims, LocationTpimsService } from '../location-tpims';
 
 @Component({
     selector: 'jhi-device-tpims-dialog',
@@ -22,11 +23,14 @@ export class DeviceTpimsDialogComponent implements OnInit {
 
     sites: SiteTpims[];
 
+    locations: LocationTpims[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private deviceService: DeviceTpimsService,
         private siteService: SiteTpimsService,
+        private locationService: LocationTpimsService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -35,6 +39,8 @@ export class DeviceTpimsDialogComponent implements OnInit {
         this.isSaving = false;
         this.siteService.query()
             .subscribe((res: HttpResponse<SiteTpims[]>) => { this.sites = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.locationService.query()
+            .subscribe((res: HttpResponse<LocationTpims[]>) => { this.locations = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -72,6 +78,10 @@ export class DeviceTpimsDialogComponent implements OnInit {
     }
 
     trackSiteById(index: number, item: SiteTpims) {
+        return item.id;
+    }
+
+    trackLocationById(index: number, item: LocationTpims) {
         return item.id;
     }
 }

@@ -42,6 +42,12 @@
                 <a [routerLink]="['/site-tpims', device.siteId]">{{device.siteId}}</a>
             </div>
         </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <div *ngIf="device.locationId">
+                <a [routerLink]="['/location-tpims', device.locationId]">{{device.locationId}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

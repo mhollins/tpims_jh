@@ -1,6 +1,8 @@
 package com.ngc.ts.service.impl;
 
+import com.ngc.ts.domain.HistoricSiteData;
 import com.ngc.ts.domain.Site;
+import com.ngc.ts.repository.HistoricSiteDataRepository;
 import com.ngc.ts.repository.SiteRepository;
 import com.ngc.ts.service.SiteStatusService;
 import com.ngc.ts.domain.SiteStatus;
@@ -37,11 +39,14 @@ public class SiteStatusServiceImpl implements SiteStatusService {
 
     private final SiteStatusSearchRepository siteStatusSearchRepository;
 
-    public SiteStatusServiceImpl(SiteStatusRepository siteStatusRepository, SiteRepository siteRepository, SiteStatusMapper siteStatusMapper, SiteStatusSearchRepository siteStatusSearchRepository) {
+    private final HistoricSiteDataRepository historicSiteDataRepository;
+
+    public SiteStatusServiceImpl(SiteStatusRepository siteStatusRepository, SiteRepository siteRepository, SiteStatusMapper siteStatusMapper, SiteStatusSearchRepository siteStatusSearchRepository, HistoricSiteDataRepository historicSiteDataRepository) {
         this.siteStatusRepository = siteStatusRepository;
         this.siteRepository = siteRepository;
         this.siteStatusMapper = siteStatusMapper;
         this.siteStatusSearchRepository = siteStatusSearchRepository;
+        this.historicSiteDataRepository = historicSiteDataRepository;
     }
 
     /**
@@ -53,24 +58,44 @@ public class SiteStatusServiceImpl implements SiteStatusService {
     @Override
     public SiteStatusDTO save(SiteStatusDTO siteStatusDTO) {
         log.debug("Request to save SiteStatus : {}", siteStatusDTO);
-        SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
 
-        Site theSite = siteRepository.findOne(siteStatusDTO.getSiteId());
+        SiteStatus siteStatus = checkValues(siteStatusDTO);
 
-        if (siteStatus.getReportedAvailable() < 0) {
-            siteStatus.setReportedAvailable(0);
-        }
-        if (siteStatus.getReportedAvailable() > theSite.getTotalCapacity()) {
-            siteStatus.setReportedAvailable(theSite.getTotalCapacity());
-        }
-        if (siteStatus.getVehiclesCounted() < 0) {
-            siteStatus.setVehiclesCounted(0);
-        }
+        return saveSiteStatus(siteStatus);
+    }
 
+    private SiteStatusDTO saveSiteStatus(SiteStatus siteStatus) {
         siteStatus = siteStatusRepository.save(siteStatus);
         SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
         siteStatusSearchRepository.save(siteStatus);
         return result;
+    }
+
+    private SiteStatus checkValues(SiteStatusDTO siteStatusDTO) {
+        SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
+
+        if (0 > siteStatus.getReportedAvailable()) {
+            siteStatus.setReportedAvailable(0);
+        }
+
+        if (siteStatusDTO.getSiteId() != null) {
+            Site theSite = siteRepository.findOne(siteStatusDTO.getSiteId());
+            siteStatus.setSite(theSite);
+            if (siteStatus.getReportedAvailable() > theSite.getTotalCapacity()) {
+                siteStatus.setReportedAvailable(theSite.getTotalCapacity());
+            }
+
+            // cap total vehicles to 150% of capacity
+            if (theSite.getTotalCapacity() * 1.5 < siteStatus.getVehiclesCounted()) {
+                siteStatus.setVehiclesCounted((theSite.getTotalCapacity() * 150) / 100);
+            }
+        }
+
+        if (0 > siteStatus.getVehiclesCounted()) {
+            siteStatus.setVehiclesCounted(0);
+        }
+
+        return siteStatus;
     }
 
     /**
@@ -82,29 +107,35 @@ public class SiteStatusServiceImpl implements SiteStatusService {
     @Override
     public SiteStatusDTO update(SiteStatusDTO siteStatusDTO) {
         log.debug("Request to update SiteStatus : {}", siteStatusDTO);
-        //SiteStatus siteStatus = siteStatusMapper.toEntity(siteStatusDTO);
+
+        SiteStatus siteStatus = checkValues(siteStatusDTO);
 
         // set operator update time
-        siteStatusDTO.setLastOperatorUpdate(Instant.now());
-        //siteStatus.setLastOperatorUpdate(Instant.now());
+        siteStatus.setLastOperatorUpdate(Instant.now());
 
         //** calculate verification amplitude
-        // if the operator provided availability is greater than the total capacity, what do we do?
-        // I don't want to add another database query to get capacity, should add capacity to status?
-
-        SiteStatus previous = siteStatusRepository.findOne(siteStatusDTO.getId());
+        SiteStatus previous = siteStatusRepository.findOne(siteStatus.getId());
         if (previous != null) {
-            siteStatusDTO.setVerificationCheckAmplitude(siteStatusDTO.getReportedAvailable() - previous.getReportedAvailable());
-            log.debug("Verification amplitude: " + siteStatusDTO.getVerificationCheckAmplitude());
+            siteStatus.setVerificationCheckAmplitude(siteStatus.getReportedAvailable() - previous.getReportedAvailable());
+            log.debug("Verification amplitude: " + siteStatus.getVerificationCheckAmplitude());
         } else {
-            siteStatusDTO.setVerificationCheckAmplitude(siteStatusDTO.getReportedAvailable());
+            siteStatus.setVerificationCheckAmplitude(siteStatus.getReportedAvailable());
         }
 
-//        siteStatus = siteStatusRepository.save(siteStatus);
-//        siteStatusSearchRepository.save(siteStatus);
-//
-//        SiteStatusDTO result = siteStatusMapper.toDto(siteStatus);
-        return this.save(siteStatusDTO);
+        HistoricSiteData historicSiteData = new HistoricSiteData()
+            .totalCapacity(siteStatus.getSite().getTotalCapacity())
+            .availability(siteStatus.getReportedAvailable())
+            .trend(siteStatus.getTrend())
+            .open(siteStatus.isOpen())
+            .trustData(siteStatus.isTrustData())
+            .timeStamp(siteStatus.getLastOperatorUpdate())
+            .verificationCheck(true)
+            .trueAvailable(siteStatusDTO.getReportedAvailable())
+            .site(siteStatus.getSite());
+        historicSiteDataRepository.save(historicSiteData);
+
+
+        return this.saveSiteStatus(siteStatus);
     }
 
     /**

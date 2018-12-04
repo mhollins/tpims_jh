@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -46,7 +47,7 @@ public class HistoricSiteData implements Serializable {
     private Boolean trustData;
 
     @Column(name = "time_stamp")
-    private ZonedDateTime timeStamp;
+    private Instant timeStamp;
 
     /**
      * notes whether available spots
@@ -141,16 +142,16 @@ public class HistoricSiteData implements Serializable {
         this.trustData = trustData;
     }
 
-    public ZonedDateTime getTimeStamp() {
+    public Instant getTimeStamp() {
         return timeStamp;
     }
 
-    public HistoricSiteData timeStamp(ZonedDateTime timeStamp) {
+    public HistoricSiteData timeStamp(Instant timeStamp) {
         this.timeStamp = timeStamp;
         return this;
     }
 
-    public void setTimeStamp(ZonedDateTime timeStamp) {
+    public void setTimeStamp(Instant timeStamp) {
         this.timeStamp = timeStamp;
     }
 

@@ -1,7 +1,7 @@
 package com.ngc.ts.service.dto;
 
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +25,7 @@ public class HistoricSiteDataDTO implements Serializable {
 
     private Boolean trustData;
 
-    private ZonedDateTime timeStamp;
+    private Instant timeStamp;
 
     private Boolean verificationCheck;
 
@@ -81,11 +81,11 @@ public class HistoricSiteDataDTO implements Serializable {
         this.trustData = trustData;
     }
 
-    public ZonedDateTime getTimeStamp() {
+    public Instant getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(ZonedDateTime timeStamp) {
+    public void setTimeStamp(Instant timeStamp) {
         this.timeStamp = timeStamp;
     }
 

@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.ZoneOffset;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.ngc.ts.web.rest.TestUtil.sameInstant;
@@ -62,8 +63,8 @@ public class HistoricSiteDataResourceIntTest {
     private static final Boolean DEFAULT_TRUST_DATA = false;
     private static final Boolean UPDATED_TRUST_DATA = true;
 
-    private static final ZonedDateTime DEFAULT_TIME_STAMP = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_TIME_STAMP = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Instant DEFAULT_TIME_STAMP = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_TIME_STAMP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Boolean DEFAULT_VERIFICATION_CHECK = false;
     private static final Boolean UPDATED_VERIFICATION_CHECK = true;
@@ -199,7 +200,7 @@ public class HistoricSiteDataResourceIntTest {
             .andExpect(jsonPath("$.[*].trend").value(hasItem(DEFAULT_TREND.toString())))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].trustData").value(hasItem(DEFAULT_TRUST_DATA.booleanValue())))
-            .andExpect(jsonPath("$.[*].timeStamp").value(hasItem(sameInstant(DEFAULT_TIME_STAMP))))
+            .andExpect(jsonPath("$.[*].timeStamp").value(hasItem(DEFAULT_TIME_STAMP.toString())))
             .andExpect(jsonPath("$.[*].verificationCheck").value(hasItem(DEFAULT_VERIFICATION_CHECK.booleanValue())))
             .andExpect(jsonPath("$.[*].trueAvailable").value(hasItem(DEFAULT_TRUE_AVAILABLE)));
     }
@@ -220,7 +221,7 @@ public class HistoricSiteDataResourceIntTest {
             .andExpect(jsonPath("$.trend").value(DEFAULT_TREND.toString()))
             .andExpect(jsonPath("$.open").value(DEFAULT_OPEN.booleanValue()))
             .andExpect(jsonPath("$.trustData").value(DEFAULT_TRUST_DATA.booleanValue()))
-            .andExpect(jsonPath("$.timeStamp").value(sameInstant(DEFAULT_TIME_STAMP)))
+            .andExpect(jsonPath("$.timeStamp").value(DEFAULT_TIME_STAMP.toString()))
             .andExpect(jsonPath("$.verificationCheck").value(DEFAULT_VERIFICATION_CHECK.booleanValue()))
             .andExpect(jsonPath("$.trueAvailable").value(DEFAULT_TRUE_AVAILABLE));
     }
@@ -338,7 +339,7 @@ public class HistoricSiteDataResourceIntTest {
             .andExpect(jsonPath("$.[*].trend").value(hasItem(DEFAULT_TREND.toString())))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].trustData").value(hasItem(DEFAULT_TRUST_DATA.booleanValue())))
-            .andExpect(jsonPath("$.[*].timeStamp").value(hasItem(sameInstant(DEFAULT_TIME_STAMP))))
+            .andExpect(jsonPath("$.[*].timeStamp").value(hasItem(DEFAULT_TIME_STAMP.toString())))
             .andExpect(jsonPath("$.[*].verificationCheck").value(hasItem(DEFAULT_VERIFICATION_CHECK.booleanValue())))
             .andExpect(jsonPath("$.[*].trueAvailable").value(hasItem(DEFAULT_TRUE_AVAILABLE)));
     }

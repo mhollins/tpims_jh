@@ -51,7 +51,7 @@ public class SiteStatusResourceIntTest {
     private static final Integer DEFAULT_VEHICLES_COUNTED = 1;
     private static final Integer UPDATED_VEHICLES_COUNTED = 2;
 
-    private static final TrendOptions DEFAULT_TREND = TrendOptions.EMPTYING;
+    private static final TrendOptions DEFAULT_TREND = TrendOptions.CLEARING;
     private static final TrendOptions UPDATED_TREND = TrendOptions.STEADY;
 
     private static final Boolean DEFAULT_OPEN = false;

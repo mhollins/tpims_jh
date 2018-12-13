@@ -25,13 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static com.ngc.ts.web.rest.TestUtil.sameInstant;
 import static com.ngc.ts.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -54,7 +50,7 @@ public class HistoricSiteDataResourceIntTest {
     private static final Integer DEFAULT_AVAILABILITY = 1;
     private static final Integer UPDATED_AVAILABILITY = 2;
 
-    private static final TrendOptions DEFAULT_TREND = TrendOptions.EMPTYING;
+    private static final TrendOptions DEFAULT_TREND = TrendOptions.CLEARING;
     private static final TrendOptions UPDATED_TREND = TrendOptions.STEADY;
 
     private static final Boolean DEFAULT_OPEN = false;

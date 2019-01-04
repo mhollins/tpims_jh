@@ -43,13 +43,17 @@
             "fieldName": "trueAvailable",
             "javadoc": "actual number availble, can\nexceed capacity & go below low threshold",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "operatorName",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180216162748",
-    "entityTableName": "historic_site_data",
     "dto": "mapstruct",
-    "pagination": "infinite-scroll",
     "service": "no",
+    "entityTableName": "historic_site_data",
     "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll",
     "angularJSSuffix": "tpims"
 }

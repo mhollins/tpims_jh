@@ -17,6 +17,7 @@ export class HistoricSiteDataTpims implements BaseEntity {
         public timeStamp?: any,
         public verificationCheck?: boolean,
         public trueAvailable?: number,
+        public operatorName?: string,
         public siteId?: number,
     ) {
         this.open = false;

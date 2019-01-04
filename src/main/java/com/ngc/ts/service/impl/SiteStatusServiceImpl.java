@@ -122,6 +122,7 @@ public class SiteStatusServiceImpl implements SiteStatusService {
             siteStatus.setVerificationCheckAmplitude(siteStatus.getReportedAvailable());
         }
 
+        /*
         HistoricSiteData historicSiteData = new HistoricSiteData()
             .totalCapacity(siteStatus.getSite().getTotalCapacity())
             .availability(siteStatus.getReportedAvailable())
@@ -131,9 +132,10 @@ public class SiteStatusServiceImpl implements SiteStatusService {
             .timeStamp(siteStatus.getLastOperatorUpdate())
             .verificationCheck(true)
             .trueAvailable(siteStatusDTO.getReportedAvailable())
-            .site(siteStatus.getSite());
+            .site(siteStatus.getSite())
+            .operatorName(operator);
         historicSiteDataRepository.save(historicSiteData);
-
+        */
 
         return this.saveSiteStatus(siteStatus);
     }

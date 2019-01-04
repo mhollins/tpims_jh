@@ -31,6 +31,8 @@ public class HistoricSiteDataDTO implements Serializable {
 
     private Integer trueAvailable;
 
+    private String operatorName;
+
     private Long siteId;
 
     public Long getId() {
@@ -105,6 +107,14 @@ public class HistoricSiteDataDTO implements Serializable {
         this.trueAvailable = trueAvailable;
     }
 
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
     public Long getSiteId() {
         return siteId;
     }
@@ -146,6 +156,7 @@ public class HistoricSiteDataDTO implements Serializable {
             ", timeStamp='" + getTimeStamp() + "'" +
             ", verificationCheck='" + isVerificationCheck() + "'" +
             ", trueAvailable=" + getTrueAvailable() +
+            ", operatorName='" + getOperatorName() + "'" +
             "}";
     }
 }

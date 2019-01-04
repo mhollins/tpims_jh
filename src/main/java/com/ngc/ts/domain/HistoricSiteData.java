@@ -49,6 +49,9 @@ public class HistoricSiteData implements Serializable {
     @Column(name = "time_stamp")
     private Instant timeStamp;
 
+    @Column(name = "operator_name")
+    private String operatorName;
+
     /**
      * notes whether available spots
      * is based on a manual reset
@@ -195,6 +198,19 @@ public class HistoricSiteData implements Serializable {
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+    public HistoricSiteData operatorName(String operatorName) {
+        this.operatorName = operatorName;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -227,6 +243,7 @@ public class HistoricSiteData implements Serializable {
             ", timeStamp='" + getTimeStamp() + "'" +
             ", verificationCheck='" + isVerificationCheck() + "'" +
             ", trueAvailable=" + getTrueAvailable() +
+            ", operatorName='" + getOperatorName() + "'" +
             "}";
     }
 }

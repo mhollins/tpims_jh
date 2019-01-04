@@ -1,0 +1,17 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mhollins (generated)" id="1546547327885-1">
+        <addColumn tableName="historic_site_data">
+            <column name="operator_name" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mhollins (generated)" id="1546547327885-2">
+        <addForeignKeyConstraint baseColumnNames="site_id" baseTableName="site_status" constraintName="FKgkwowl5unx0dxm0amd9spvnor" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="site"/>
+    </changeSet>
+    <!--<changeSet author="mhollins (generated)" id="1546547327885-3">-->
+        <!--<dropForeignKeyConstraint baseTableName="jhi_persistent_token" constraintName="fk_user_persistent_token"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="mhollins (generated)" id="1546547327885-4">-->
+        <!--<dropTable tableName="jhi_persistent_token"/>-->
+    <!--</changeSet>-->
+</databaseChangeLog>

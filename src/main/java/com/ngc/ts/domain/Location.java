@@ -58,10 +58,10 @@ public class Location implements Serializable {
     @Column(name = "time_zone")
     private String timeZone;
 
-    @Column(name = "latitude", precision=10, scale=2)
+    @Column(name = "latitude", precision=10, scale=8)
     private BigDecimal latitude;
 
-    @Column(name = "longitude", precision=10, scale=2)
+    @Column(name = "longitude", precision=10, scale=8)
     private BigDecimal longitude;
 
     @ManyToOne

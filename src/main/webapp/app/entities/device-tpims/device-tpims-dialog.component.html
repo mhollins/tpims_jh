@@ -48,6 +48,11 @@
                 [(ngModel)]="device.timeout" />
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_maxPerCycle">Max Vehicles per Cycle</label>
+            <input type="number" class="form-control" name="maxPerCycle" id="field_maxPerCycle"
+                   [(ngModel)]="device.maxPerCycle" />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_locationfunction">Location Function</label>
             <select class="form-control" name="locationfunction" [(ngModel)]="device.locationfunction" id="field_locationfunction" >
                 <option value="ENTRANCE">ENTRANCE</option>

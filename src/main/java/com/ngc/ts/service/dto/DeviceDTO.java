@@ -36,6 +36,8 @@ public class DeviceDTO implements Serializable {
 
     private Long locationId;
 
+    private Integer maxPerCycle;
+
     public Long getId() {
         return id;
     }
@@ -130,6 +132,14 @@ public class DeviceDTO implements Serializable {
 
     public void setLocationId(Long locationId) {
         this.locationId = locationId;
+    }
+
+    public Integer getMaxPerCycle() {
+        return maxPerCycle;
+    }
+
+    public void setMaxPerCycle(Integer maxPerCycle) {
+        this.maxPerCycle = maxPerCycle;
     }
 
     @Override

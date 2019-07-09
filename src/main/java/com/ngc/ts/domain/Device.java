@@ -50,6 +50,9 @@ public class Device implements Serializable {
     @Column(name = "timeout")
     private Integer timeout;
 
+    @Column(name = "max_per_cycle")
+    private Integer maxPerCycle;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "locationfunction")
     private LocationFunctions locationfunction;
@@ -199,6 +202,15 @@ public class Device implements Serializable {
         this.location = location;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+
+    public Integer getMaxPerCycle() {
+        return maxPerCycle;
+    }
+
+    public void setMaxPerCycle(Integer maxPerCycle) {
+        this.maxPerCycle = maxPerCycle;
+    }
 
     @Override
     public boolean equals(Object o) {

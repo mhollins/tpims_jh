@@ -21,6 +21,7 @@ export class DeviceTpims implements BaseEntity {
         public siteId?: number,
         public siteName?: string,
         public locationId?: number,
+        public maxPerCycle?: number,
     ) {
     }
 }

@@ -141,3 +141,5 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+.odo/odo-file-index.json
